@@ -12,7 +12,7 @@ public class Gambling {
 
     public static void main(String[] args) {
         startGambling();
-        playForDays();
+        trackWinLossDays();
 
     }
     static void playForDays() {
@@ -47,5 +47,22 @@ public class Gambling {
             stake -= BET;
         }
         return stake;
+    }
+    static void trackWinLossDays() {
+        int winDays = 0;
+        int lossDays = 0;
+
+        for (int day = 1; day <= DAYS; day++) {
+            int stake = STAKE;
+
+            while (stake > LOWER_LIMIT && stake < UPPER_LIMIT) {
+                stake = playGame(stake);
+            }
+            if (stake > STAKE) {
+                winDays++;
+            } else {
+                lossDays++;
+            }
+        }
     }
 }
