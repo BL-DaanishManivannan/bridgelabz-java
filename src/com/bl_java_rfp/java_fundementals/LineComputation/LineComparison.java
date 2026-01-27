@@ -13,10 +13,14 @@ public class LineComparison {
         double line2Length = Math.sqrt(
                 Math.pow(8 - 6, 2) + Math.pow(10 - 8, 2)
         );
-        if (Double.valueOf(line1Length).equals(line2Length)) {
+        int result = line1Length.compareTo(line2Length);
+
+        if (result == 0) {
             System.out.println("Both lines are equal");
+        } else if (result < 0) {
+            System.out.println("Line 1 is shorter than Line 2");
         } else {
-            System.out.println("Lines are not equal");
+            System.out.println("Line 1 is longer than Line 2");
         }
 
     }
