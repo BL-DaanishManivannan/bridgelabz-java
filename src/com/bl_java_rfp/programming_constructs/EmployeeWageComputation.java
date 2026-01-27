@@ -18,29 +18,40 @@ public class EmployeeWageComputation {
         int totalWage = 0;
         int WORKING_DAYS_PER_MONTH = 20;
 
-        for (int day = 1; day <= WORKING_DAYS_PER_MONTH; day++) {
+        int MAX_WORKING_DAYS = 20;
+        int MAX_WORKING_HOURS = 100;
+
+        int totalWorkingDays = 0;
+        int totalWorkingHours = 0;
+
+        while (totalWorkingDays < MAX_WORKING_DAYS
+                && totalWorkingHours < MAX_WORKING_HOURS) {
+
+            totalWorkingDays++;
 
             int empCheck = (int) Math.floor(Math.random() * 10) % 3;
-            int dailyWage = 0;
+            int dailyHours = 0;
 
             switch (empCheck) {
-
                 case IS_FULL_TIME:
-                    dailyWage = WAGE_PER_HOUR * FULL_DAY_HOURS;
+                    dailyHours = FULL_DAY_HOURS;
                     break;
 
                 case IS_PART_TIME:
-                    dailyWage = WAGE_PER_HOUR * PART_TIME_HOURS;
+                    dailyHours = PART_TIME_HOURS;
                     break;
 
                 default:
-                    dailyWage = 0;
+                    dailyHours = 0;
             }
 
-            totalWage += dailyWage;
+            totalWorkingHours += dailyHours;
+            totalWage += dailyHours * WAGE_PER_HOUR;
         }
 
-        System.out.println("Total Employee Wage for the Month: " + totalWage);
 
+        System.out.println("Total Working Days: " + totalWorkingDays);
+        System.out.println("Total Working Hours: " + totalWorkingHours);
+        System.out.println("Total Employee Wage: " + totalWage);
     }
 }
