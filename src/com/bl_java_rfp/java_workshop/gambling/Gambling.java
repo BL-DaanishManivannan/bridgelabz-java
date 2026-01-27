@@ -12,7 +12,9 @@ public class Gambling {
 
     public static void main(String[] args) {
         startGambling();
-        trackLuckiestUnluckiestDay();
+        int totalAmount = calculateTotalAmount();
+        shouldContinueGambling(totalAmount);
+
 
     }
     static void playForDays() {
@@ -87,5 +89,23 @@ public class Gambling {
                 unluckiestDay = day;
             }
         }
+    }
+    static int calculateTotalAmount() {
+       int totalAmount = 0;
+
+       for (int day = 1; day <= DAYS; day++) {
+           int stake = STAKE;
+
+           while (stake > LOWER_LIMIT && stake < UPPER_LIMIT) {
+               stake = playGame(stake);
+           }
+
+           totalAmount += (stake - STAKE);
+       }
+       return totalAmount;
+    }
+
+    static boolean shouldContinueGambling(int totalAmount) {
+       return totalAmount > 0;
     }
 }
