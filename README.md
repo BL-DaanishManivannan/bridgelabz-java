@@ -11,3 +11,8 @@
 ##### while loop
 ##### switch case
 ##### operators
+
+#### Java Fundementals 
+##### Employee Wage Computation
+##### Line Computation
+
