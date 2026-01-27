@@ -12,7 +12,7 @@ public class Gambling {
 
     public static void main(String[] args) {
         startGambling();
-        trackWinLossDays();
+        trackLuckiestUnluckiestDay();
 
     }
     static void playForDays() {
@@ -64,5 +64,30 @@ public class Gambling {
                 lossDays++;
             }
         }
+        static void trackLuckiestUnluckiestDay() {
+            int maxWin = Integer.MIN_VALUE;
+            int maxLoss = Integer.MAX_VALUE;
+            int luckiestDay = 0;
+            int unluckiestDay = 0;
+
+            for (int day = 1; day <= DAYS; day++) {
+                int stake = STAKE;
+
+                while (stake > LOWER_LIMIT && stake < UPPER_LIMIT) {
+                            stake = playGame(stake);
+                        }
+                int dailyResult = stake - STAKE;
+
+                if (dailyResult > maxWin) {
+                    maxWin = dailyResult;
+                    luckiestDay = day;
+                }
+                if (dailyResult < maxLoss) {
+                maxLoss = dailyResult;
+                unluckiestDay = day;
+                }
+            }
+        }
+
     }
 }
