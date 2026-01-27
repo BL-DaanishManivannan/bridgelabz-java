@@ -6,9 +6,9 @@
 
 #### Basic Problems
 
-##### if else 
-##### for loop
-##### while loop
-##### switch case
-##### operators
+if else 
+for loop
+while loop
+switch case
+operators
 
