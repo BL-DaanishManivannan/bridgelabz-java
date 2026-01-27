@@ -10,11 +10,18 @@ public class SnakeAndLadder {
         int diceRoll = (int) (Math.floor(Math.random() * 10) % 6) + 1;
         int option = (int) (Math.floor(Math.random() * 10) % 3);
 
+
         if (option == 0) {
             System.out.println("No Play");
+
         } else if (option == 1) {
-            position += diceRoll;
-            System.out.println("Ladder");
+            if (position + diceRoll <= 100) {
+                position += diceRoll;
+                System.out.println("Ladder");
+            } else {
+                System.out.println("Ladder ignored (exceeds 100)");
+            }
+
         } else {
             position -= diceRoll;
             if (position < 0) {
