@@ -7,11 +7,27 @@ public class Gambling {
     static final int WIN = 1;
     static final int LOWER_LIMIT = 50;
     static final int UPPER_LIMIT = 150;
+    static final int DAYS = 20;
+
 
     public static void main(String[] args) {
         startGambling();
-    }
+        playForDays();
 
+    }
+    static void playForDays() {
+    int totalAmount = 0;
+
+    for (int day = 1; day <= DAYS; day++) {
+            int stake = STAKE;
+
+            while (stake > LOWER_LIMIT && stake < UPPER_LIMIT) {
+                stake = playGame(stake);
+                }
+
+            totalAmount += (stake - STAKE);
+    }
+}
     static void startGambling() {
         int stake = STAKE;
         stake = playGame(stake);
