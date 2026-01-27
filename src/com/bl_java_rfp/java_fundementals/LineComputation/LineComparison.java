@@ -7,11 +7,17 @@ public class LineComparison {
         int x1 = 2, y1 = 4;
         int x2 = 6, y2 = 8;
 
-        double length = Math.sqrt(
-                Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)
+        double line1Length = Math.sqrt(
+                Math.pow(4 - 2, 2) + Math.pow(6 - 4, 2)
         );
-
-        System.out.println("Length of the line: " + length);
+        double line2Length = Math.sqrt(
+                Math.pow(8 - 6, 2) + Math.pow(10 - 8, 2)
+        );
+        if (Double.valueOf(line1Length).equals(line2Length)) {
+            System.out.println("Both lines are equal");
+        } else {
+            System.out.println("Lines are not equal");
+        }
 
     }
 }
