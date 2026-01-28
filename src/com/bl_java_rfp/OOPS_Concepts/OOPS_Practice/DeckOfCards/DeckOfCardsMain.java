@@ -3,6 +3,7 @@ package com.bl_java_rfp.OOPS_Concepts.OOPS_Practice.DeckOfCards;
 public class DeckOfCardsMain {
 
     public static void main(String[] args) {
+
         System.out.println("Welcome to Deck of Cards Program");
 
         String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
@@ -14,6 +15,7 @@ public class DeckOfCardsMain {
         String[] deck = new String[52];
         int index = 0;
 
+        // UC1: Initialize deck
         for (String suit : suits) {
             for (String rank : ranks) {
                 deck[index++] = rank + " of " + suit;
@@ -28,6 +30,18 @@ public class DeckOfCardsMain {
             deck[randomIndex] = temp;
         }
 
-        System.out.println("Deck shuffled successfully");
+        int players = 4;
+        int cardsPerPlayer = 9;
+        String[][] playerCards = new String[players][cardsPerPlayer];
+
+        int cardIndex = 0;
+
+        for (int i = 0; i < players; i++) {
+            for (int j = 0; j < cardsPerPlayer; j++) {
+                playerCards[i][j] = deck[cardIndex++];
+            }
+        }
+
+        System.out.println("Cards distributed to players");
     }
 }
