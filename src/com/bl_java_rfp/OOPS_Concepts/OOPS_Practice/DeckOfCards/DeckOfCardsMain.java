@@ -42,6 +42,12 @@ public class DeckOfCardsMain {
             }
         }
 
-        System.out.println("Cards distributed to players");
+        // UC4: Display player cards
+        for (int i = 0; i < players; i++) {
+            System.out.println("\nPlayer " + (i + 1) + " cards:");
+            for (int j = 0; j < cardsPerPlayer; j++) {
+                System.out.println(playerCards[i][j]);
+            }
+        }
     }
 }
