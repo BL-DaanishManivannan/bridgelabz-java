@@ -11,4 +11,7 @@ public class Stock {
         this.numberOfShares = numberOfShares;
         this.sharePrice = sharePrice;
     }
+    public double calculateStockValue() {
+        return numberOfShares * sharePrice;
+    }
 }
