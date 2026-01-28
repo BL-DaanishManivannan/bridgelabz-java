@@ -20,6 +20,14 @@ public class DeckOfCardsMain {
             }
         }
 
-        System.out.println("Deck initialized with " + deck.length + " cards");
+        for (int i = 0; i < deck.length; i++) {
+            int randomIndex = (int) (Math.random() * deck.length);
+
+            String temp = deck[i];
+            deck[i] = deck[randomIndex];
+            deck[randomIndex] = temp;
+        }
+
+        System.out.println("Deck shuffled successfully");
     }
 }
