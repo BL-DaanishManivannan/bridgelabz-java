@@ -13,4 +13,17 @@ public class CompanyShares {
         this.numberOfShares = numberOfShares;
         this.transactionTime = LocalDateTime.now();
     }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void addShares(int shares) {
+        this.numberOfShares += shares;
+    }
+
+    public void updateTransactionTime() {
+        this.transactionTime = LocalDateTime.now();
+    }
+
 }
