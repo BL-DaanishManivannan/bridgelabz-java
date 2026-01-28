@@ -26,4 +26,13 @@ public class CompanyShares {
         this.transactionTime = LocalDateTime.now();
     }
 
+    public int getNumberOfShares() {
+        return numberOfShares;
+    }
+
+    public void removeShares(int shares) {
+        this.numberOfShares -= shares;
+    }
+
+
 }
