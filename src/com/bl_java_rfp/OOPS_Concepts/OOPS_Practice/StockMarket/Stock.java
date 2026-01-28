@@ -14,4 +14,9 @@ public class Stock {
     public double calculateStockValue() {
         return numberOfShares * sharePrice;
     }
+    @Override
+    public String toString() {
+        return stockName;
+    }
+
 }

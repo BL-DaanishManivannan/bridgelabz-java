@@ -15,7 +15,18 @@ public class StockPortfolio {
         System.out.println("Stock added to portfolio");
     }
 
-    public ArrayList<Stock> getStockList() {
-        return stockList;
+    public double calculateTotalPortfolioValue() {
+
+        double totalValue = 0;
+
+        for (Stock stock : stockList) {
+            double stockValue = stock.calculateStockValue();
+            System.out.println(
+                    "Stock: " + stock + " | Value: " + stockValue
+            );
+            totalValue += stockValue;
+        }
+
+        return totalValue;
     }
 }
