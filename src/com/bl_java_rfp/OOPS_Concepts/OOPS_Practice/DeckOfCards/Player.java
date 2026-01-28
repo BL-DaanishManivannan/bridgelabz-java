@@ -74,4 +74,15 @@ public class Player {
     public CardNode getHead() {
         return head;
     }
+    public void displayCards() {
+
+        System.out.println("Player: " + playerName);
+
+        CardNode current = head;
+        while (current != null) {
+            System.out.println("  " + current.card);
+            current = current.next;
+        }
+    }
+
 }
