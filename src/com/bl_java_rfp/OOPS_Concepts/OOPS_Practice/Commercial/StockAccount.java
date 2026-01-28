@@ -10,7 +10,6 @@ public class StockAccount {
         companySharesList = new ArrayList<>();
     }
 
-    // UC2: Buy shares
     public void buyShares(String companyName, int sharesToBuy) {
 
         for (CompanyShares company : companySharesList) {
@@ -29,7 +28,6 @@ public class StockAccount {
         System.out.println("New company shares added for " + companyName);
     }
 
-    // UC3: Sell shares
     public void sellShares(String companyName, int sharesToSell) {
 
         for (CompanyShares company : companySharesList) {
@@ -54,5 +52,18 @@ public class StockAccount {
         }
 
         System.out.println("Company not found: " + companyName);
+    }
+
+    public void displayCompanyShares() {
+
+        System.out.println("\nCompany Share Records:");
+
+        for (CompanyShares company : companySharesList) {
+            System.out.println(
+                    "Company: " + company.getCompanyName()
+                            + " | Shares: " + company.getNumberOfShares()
+                            + " | Last Transaction: " + company.getTransactionTime()
+            );
+        }
     }
 }

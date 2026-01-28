@@ -34,5 +34,8 @@ public class CompanyShares {
         this.numberOfShares -= shares;
     }
 
+    public LocalDateTime getTransactionTime() {
+        return transactionTime;
+    }
 
 }
