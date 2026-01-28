@@ -14,4 +14,29 @@ public class AddressBook {
         contactList.add(contact);
         System.out.println("Contact added successfully");
     }
+    public void editContact(String firstName,
+                            String address,
+                            String city,
+                            String state,
+                            int zip,
+                            long phoneNumber,
+                            String email) {
+
+        for (ContactPerson contact : contactList) {
+            if (contact.getFirstName().equals(firstName)) {
+
+                contact.setAddress(address);
+                contact.setCity(city);
+                contact.setState(state);
+                contact.setZip(zip);
+                contact.setPhoneNumber(phoneNumber);
+                contact.setEmail(email);
+
+                System.out.println("Contact updated successfully");
+                return;
+            }
+        }
+
+        System.out.println("Contact not found");
+    }
 }
