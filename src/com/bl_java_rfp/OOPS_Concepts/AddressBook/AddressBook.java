@@ -1,6 +1,8 @@
 package com.bl_java_rfp.OOPS_Concepts.AddressBook;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 
 public class AddressBook {
 
@@ -33,6 +35,22 @@ public class AddressBook {
                 contact.setEmail(email);
 
                 System.out.println("Contact updated successfully");
+                return;
+            }
+        }
+
+        System.out.println("Contact not found");
+    }
+    public void deleteContact(String firstName) {
+
+        Iterator<ContactPerson> iterator = contactList.iterator();
+
+        while (iterator.hasNext()) {
+            ContactPerson contact = iterator.next();
+
+            if (contact.getFirstName().equals(firstName)) {
+                iterator.remove();
+                System.out.println("Contact deleted successfully");
                 return;
             }
         }
