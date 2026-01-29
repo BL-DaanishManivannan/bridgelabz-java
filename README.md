@@ -27,3 +27,7 @@
 #### Java Programming workshop
 ##### Gambling Problem
 
+### OOPS and DSA
+#### OOPS Concepts
+#### OOPS Concepts Part 2
+#### OOPS Practice Problems
