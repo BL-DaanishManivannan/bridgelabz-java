@@ -1,6 +1,6 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.DataStructure;
 
-// Main class to demonstrate deletion of first node
+// Main class to demonstrate deletion of last node
 public class LinkedListMain {
 
     public static void main(String[] args) {
@@ -10,7 +10,7 @@ public class LinkedListMain {
         list.append(new Node(30));
         list.append(new Node(70));
 
-        list.pop();
+        list.popLast();
 
         list.display();
     }
