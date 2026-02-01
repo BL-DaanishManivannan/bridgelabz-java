@@ -1,15 +1,22 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.DataStructure;
 
 // LinkedList class to manage node insertion and traversal
-// Supports adding nodes at beginning and displaying the list
+// Supports appending nodes at the end of the list
 public class LinkedList {
 
     Node head;
 
-    // UC2: Add node at the beginning
-    public void push(Node newNode) {
-        newNode.next = head;
-        head = newNode;
+    // UC3: Append node at the end
+    public void append(Node newNode) {
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+        Node temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = newNode;
     }
 
     public void display() {
