@@ -1,7 +1,7 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.DataStructure;
 
-// LinkedList class to manage node insertion and deletion
-// Supports deleting the last node (popLast operation)
+// LinkedList class to manage node operations
+// Supports searching a node by value
 public class LinkedList {
 
     Node head;
@@ -18,14 +18,12 @@ public class LinkedList {
         temp.next = newNode;
     }
 
-    // UC5: Remove first element
     public void pop() {
         if (head != null) {
             head = head.next;
         }
     }
 
-    // UC6: Remove last element
     public void popLast() {
         if (head == null || head.next == null) {
             head = null;
@@ -36,6 +34,18 @@ public class LinkedList {
             temp = temp.next;
         }
         temp.next = null;
+    }
+
+    // UC7: Search node with given key
+    public Node search(int key) {
+        Node temp = head;
+        while (temp != null) {
+            if (temp.data == key) {
+                return temp;
+            }
+            temp = temp.next;
+        }
+        return null;
     }
 
     public void display() {
