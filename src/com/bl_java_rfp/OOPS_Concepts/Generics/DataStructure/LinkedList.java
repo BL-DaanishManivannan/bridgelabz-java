@@ -1,12 +1,11 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.DataStructure;
 
-// LinkedList class to manage node insertion and traversal
-// Supports inserting a node after a given node
+// LinkedList class to manage node insertion and deletion
+// Supports deleting the first node (pop operation)
 public class LinkedList {
 
     Node head;
 
-    // Append node at the end (used for setup)
     public void append(Node newNode) {
         if (head == null) {
             head = newNode;
@@ -19,16 +18,10 @@ public class LinkedList {
         temp.next = newNode;
     }
 
-    // UC4: Insert node after given value
-    public void insertAfter(int key, Node newNode) {
-        Node temp = head;
-        while (temp != null) {
-            if (temp.data == key) {
-                newNode.next = temp.next;
-                temp.next = newNode;
-                return;
-            }
-            temp = temp.next;
+    // UC5: Remove first element
+    public void pop() {
+        if (head != null) {
+            head = head.next;
         }
     }
 
