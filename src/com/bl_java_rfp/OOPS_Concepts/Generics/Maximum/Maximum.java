@@ -9,27 +9,22 @@ public class Maximum<T extends Comparable<T>> {
         this.values = values;
     }
 
+    // Calls printMax internally
     public T testMaximum() {
-        return Maximum.testMaximum(values);
+        return printMax(values);
     }
 
-    // UC4: Generic varargs max method using sorting
-    public static <T extends Comparable<T>> T testMaximum(T... values) {
+    // UC5: Generic method to print and return maximum
+    public static <T extends Comparable<T>> T printMax(T... values) {
         Arrays.sort(values);
-        return values[values.length - 1];
+        T max = values[values.length - 1];
+        System.out.println("Maximum value is: " + max);
+        return max;
     }
 
     public static void main(String[] args) {
-        Maximum<Integer> intMax =
-                new Maximum<>(3, 5, 9, 2, 7);
-        System.out.println("Max Integer: " + intMax.testMaximum());
-
-        Maximum<Float> floatMax =
-                new Maximum<>(3.2f, 5.6f, 4.1f, 9.8f);
-        System.out.println("Max Float: " + floatMax.testMaximum());
-
-        Maximum<String> stringMax =
-                new Maximum<>("Apple", "Peach", "Banana", "Mango");
-        System.out.println("Max String: " + stringMax.testMaximum());
+        new Maximum<>(3, 5, 9, 2, 7).testMaximum();
+        new Maximum<>(3.2f, 5.6f, 4.1f, 9.8f).testMaximum();
+        new Maximum<>("Apple", "Peach", "Banana", "Mango").testMaximum();
     }
 }
