@@ -1,27 +1,31 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.DataStructure;
 
-// LinkedList class to manage node operations
-// Supports deletion of a specific node and size calculation
-public class LinkedList {
+// Generic LinkedList implementation
+// Supports search, insert, delete, and size operations
+public class LinkedList<T extends Comparable<T>> {
 
-    Node head;
+    Node<T> head;
 
-    public void append(Node newNode) {
+    public void append(T data) {
+        Node<T> newNode = new Node<>(data);
+
         if (head == null) {
             head = newNode;
             return;
         }
-        Node temp = head;
+
+        Node<T> temp = head;
         while (temp.next != null) {
             temp = temp.next;
         }
         temp.next = newNode;
     }
 
-    public Node search(int key) {
-        Node temp = head;
+    // Search node by key
+    public Node<T> search(T key) {
+        Node<T> temp = head;
         while (temp != null) {
-            if (temp.data == key) {
+            if (temp.data.compareTo(key) == 0) {
                 return temp;
             }
             temp = temp.next;
@@ -29,18 +33,28 @@ public class LinkedList {
         return null;
     }
 
-    // UC9: Delete node with given key
-    public void delete(int key) {
+    // Insert after a given key
+    public void insertAfter(T key, T newData) {
+        Node<T> current = search(key);
+        if (current != null) {
+            Node<T> newNode = new Node<>(newData);
+            newNode.next = current.next;
+            current.next = newNode;
+        }
+    }
+
+    // Delete node by key
+    public void delete(T key) {
         if (head == null) return;
 
-        if (head.data == key) {
+        if (head.data.compareTo(key) == 0) {
             head = head.next;
             return;
         }
 
-        Node temp = head;
+        Node<T> temp = head;
         while (temp.next != null) {
-            if (temp.next.data == key) {
+            if (temp.next.data.compareTo(key) == 0) {
                 temp.next = temp.next.next;
                 return;
             }
@@ -48,10 +62,10 @@ public class LinkedList {
         }
     }
 
-    // UC9: Get size of LinkedList
+    // Get size of LinkedList
     public int size() {
         int count = 0;
-        Node temp = head;
+        Node<T> temp = head;
         while (temp != null) {
             count++;
             temp = temp.next;
@@ -60,7 +74,7 @@ public class LinkedList {
     }
 
     public void display() {
-        Node temp = head;
+        Node<T> temp = head;
         while (temp != null) {
             System.out.print(temp.data);
             if (temp.next != null) {

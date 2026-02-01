@@ -1,12 +1,13 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.DataStructure;
 
-// Node class represents a single element in the LinkedList
-// Stores integer data and reference to the next node
-public class Node {
-    int data;
-    Node next;
+// Generic Node class for LinkedList
+// Stores comparable data and reference to next node
+public class Node<T extends Comparable<T>> {
 
-    public Node(int data) {
+    T data;
+    Node<T> next;
+
+    public Node(T data) {
         this.data = data;
         this.next = null;
     }

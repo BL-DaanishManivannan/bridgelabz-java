@@ -1,19 +1,17 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.DataStructure;
 
-// Main class to demonstrate deletion and size of LinkedList
+// Main class to demonstrate Ordered LinkedList
 public class LinkedListMain {
 
     public static void main(String[] args) {
-        LinkedList list = new LinkedList();
 
-        list.append(new Node(56));
-        list.append(new Node(30));
-        list.append(new Node(40));
-        list.append(new Node(70));
+        SortedLinkedList<Integer> list = new SortedLinkedList<>();
 
-        list.delete(40);
+        list.add(56);
+        list.add(30);
+        list.add(40);
+        list.add(70);
 
         list.display();
-        System.out.println("LinkedList Size: " + list.size());
     }
 }
