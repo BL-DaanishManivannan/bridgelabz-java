@@ -1,3 +1,6 @@
+// Project to find the maximum value among inputs
+// Uses Java Generics with Comparable for type safety
+// Supports multiple data types and variable arguments
 package com.bl_java_rfp.OOPS_Concepts.Generics.Maximum;
 import java.util.Arrays;
 public class Maximum<T extends Comparable<T>> {
