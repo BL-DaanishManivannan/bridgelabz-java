@@ -1,6 +1,6 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.StackQueue;
 
-// Main class to demonstrate Queue creation
+// Main class to demonstrate dequeue operation on Queue
 public class StackQueueMain {
 
     public static void main(String[] args) {
@@ -10,6 +10,8 @@ public class StackQueueMain {
         queue.enqueue(30);
         queue.enqueue(70);
 
-        queue.display();
+        while (!queue.isEmpty()) {
+            System.out.println("Dequeued: " + queue.dequeue());
+        }
     }
 }
