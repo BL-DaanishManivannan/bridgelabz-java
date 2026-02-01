@@ -1,6 +1,6 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.StackQueue;
 
-// Main class to demonstrate Stack creation
+// Main class to demonstrate peek and pop operations on Stack
 public class StackQueueMain {
 
     public static void main(String[] args) {
@@ -10,6 +10,10 @@ public class StackQueueMain {
         stack.push(30);
         stack.push(56);
 
-        stack.display();
+        System.out.println("Top element (peek): " + stack.peek());
+
+        while (!stack.isEmpty()) {
+            System.out.println("Popped: " + stack.pop());
+        }
     }
 }
