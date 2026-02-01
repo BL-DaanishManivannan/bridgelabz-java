@@ -22,4 +22,25 @@ public class LinkedList {
     // UC4: Insert node after given value
     public void insertAfter(int key, Node newNode) {
         Node temp = head;
-        while (
+        while (temp != null) {
+            if (temp.data == key) {
+                newNode.next = temp.next;
+                temp.next = newNode;
+                return;
+            }
+            temp = temp.next;
+        }
+    }
+
+    public void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data);
+            if (temp.next != null) {
+                System.out.print(" -> ");
+            }
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+}
