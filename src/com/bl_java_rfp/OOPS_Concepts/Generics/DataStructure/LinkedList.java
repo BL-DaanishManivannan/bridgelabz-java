@@ -1,7 +1,7 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.DataStructure;
 
 // LinkedList class to manage node operations
-// Supports searching a node by value
+// Supports inserting a node after a searched value
 public class LinkedList {
 
     Node head;
@@ -36,7 +36,6 @@ public class LinkedList {
         temp.next = null;
     }
 
-    // UC7: Search node with given key
     public Node search(int key) {
         Node temp = head;
         while (temp != null) {
@@ -46,6 +45,15 @@ public class LinkedList {
             temp = temp.next;
         }
         return null;
+    }
+
+    // UC8: Insert new node after given key
+    public void insertAfter(int key, Node newNode) {
+        Node current = search(key);
+        if (current != null) {
+            newNode.next = current.next;
+            current.next = newNode;
+        }
     }
 
     public void display() {

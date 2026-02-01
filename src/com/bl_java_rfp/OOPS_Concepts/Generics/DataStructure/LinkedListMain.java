@@ -1,6 +1,6 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.DataStructure;
 
-// Main class to demonstrate searching in LinkedList
+// Main class to demonstrate inserting after a specific node
 public class LinkedListMain {
 
     public static void main(String[] args) {
@@ -10,13 +10,7 @@ public class LinkedListMain {
         list.append(new Node(30));
         list.append(new Node(70));
 
-        Node result = list.search(30);
-
-        if (result != null) {
-            System.out.println("Node found with value: " + result.data);
-        } else {
-            System.out.println("Node not found");
-        }
+        list.insertAfter(30, new Node(40));
 
         list.display();
     }
