@@ -1,4 +1,4 @@
-package com.bl_java_rfp.OOPS_Concepts.Generics.HashTableBST;
+package com.bl_java_rfp.OOPS_Concepts.Generics.HashTable;
 
 // LinkedList implementation to store MyMapNode elements
 // Supports add, get, remove operations

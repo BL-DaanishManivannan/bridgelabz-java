@@ -1,4 +1,4 @@
-package com.bl_java_rfp.OOPS_Concepts.Generics.HashTableBST;
+package com.bl_java_rfp.OOPS_Concepts.Generics.HashTable;
 
 // MyMapNode represents a key-value pair for HashTable
 // Key stores the word and Value stores its frequency

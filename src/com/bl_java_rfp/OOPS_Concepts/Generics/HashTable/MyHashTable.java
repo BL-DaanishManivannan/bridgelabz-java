@@ -1,4 +1,4 @@
-package com.bl_java_rfp.OOPS_Concepts.Generics.HashTableBST;
+package com.bl_java_rfp.OOPS_Concepts.Generics.HashTable;
 
 // Custom HashTable implementation using LinkedList buckets
 public class MyHashTable<K, V> {

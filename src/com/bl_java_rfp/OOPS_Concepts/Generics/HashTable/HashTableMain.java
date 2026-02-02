@@ -1,7 +1,7 @@
-package com.bl_java_rfp.OOPS_Concepts.Generics.HashTableBST;
+package com.bl_java_rfp.OOPS_Concepts.Generics.HashTable;
 
 // Main class to demonstrate removal of a word from HashTable
-public class HashTableBSTMain {
+public class HashTableMain {
 
     public static void main(String[] args) {
 
