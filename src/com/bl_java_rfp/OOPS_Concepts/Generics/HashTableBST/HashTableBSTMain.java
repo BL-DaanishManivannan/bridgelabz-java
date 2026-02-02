@@ -1,11 +1,24 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.HashTableBST;
 
-// Project to implement Hash Table and Binary Search Tree using Java Generics
-// Covers word frequency using HashTable and node operations using BST
-// Acts as base initialization for HashTable and BST problems
+// Main class to demonstrate word frequency using HashTable
 public class HashTableBSTMain {
 
     public static void main(String[] args) {
-        System.out.println("Welcome to HashTable and Binary Search Tree using Java Generics");
+
+        String sentence = "To be or not to be";
+        String[] words = sentence.toLowerCase().split(" ");
+
+        MyLinkedList<String, Integer> list = new MyLinkedList<>();
+
+        for (String word : words) {
+            Integer count = list.get(word);
+            if (count == null) {
+                list.add(word, 1);
+            } else {
+                list.add(word, count + 1);
+            }
+        }
+
+        list.display();
     }
 }
