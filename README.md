@@ -1,33 +1,23 @@
-# BridgeLabz Java RFP
+# 📘 BridgeLabz Java RFP
 
-## Completed Progress
+## ✅ Task Completion Log
 
-### Java Programming Construct
+| Task / Module | Sub Task | Completed Date |
+|---------------|----------|----------------|
+| Java Programming Constructs | If–Else Statements | 19 Jan 2026 |
+| Java Programming Constructs | For Loop | 19 Jan 2026 |
+| Java Programming Constructs | While Loop | 19 Jan 2026 |
+| Java Programming Constructs | Switch Case | 19 Jan 2026 |
+| Java Programming Constructs | Operators | 19 Jan 2026 |
+| Java Fundamentals | Employee Wage Computation | 20 Jan 2026 |
+| Java Fundamentals | Line Computation | 20 Jan 2026 |
+| Programming Constructs | Employee Wage Computation – Part 2 | 21 Jan 2026 |
+| Programming Constructs | Snake and Ladder | 21 Jan 2026 |
+| Basic Core & Functional Programs | Core Programs | 22 Jan 2026 |
+| Logical Programs | Logical Problem Solving | 23 Jan 2026 |
+| Java Programming Workshop | Gambling Problem | 24 Jan 2026 |
+| OOPS and DSA | OOPS Concepts | 25 Jan 2026 |
+| OOPS and DSA | OOPS Concepts – Part 2 | 25 Jan 2026 |
+| OOPS and DSA | OOPS Practice Problems | 25 Jan 2026 |
 
-#### Basic Problems
-
-##### if else
-##### for loop
-##### while loop
-##### switch case
-##### operators
-
-#### Java Fundementals 
-##### Employee Wage Computation
-##### Line Computation
-
-#### Programming Constrcuts 
-##### Employee Wage Computation Part 2
-##### Snake and Ladder
-
-
-#### Basic Core and Functional Programs
-#### Logical Programs 
-
-#### Java Programming workshop
-##### Gambling Problem
-
-### OOPS and DSA
-#### OOPS Concepts
-#### OOPS Concepts Part 2
-#### OOPS Practice Problems
+---
