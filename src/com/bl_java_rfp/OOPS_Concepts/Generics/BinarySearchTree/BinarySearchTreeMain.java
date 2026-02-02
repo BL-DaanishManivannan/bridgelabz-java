@@ -1,11 +1,16 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.BinarySearchTree;
 
-// Project to implement Binary Search Tree using Java Generics
-// Covers node insertion, size calculation, and search operations
-// Acts as initialization for BST problem statements
+// Main class to demonstrate BST creation
 public class BinarySearchTreeMain {
 
     public static void main(String[] args) {
-        System.out.println("Welcome to Binary Search Tree using Java Generics");
+
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+
+        bst.add(56);
+        bst.add(30);
+        bst.add(70);
+
+        System.out.println("BST created with root 56, left 30, right 70");
     }
 }
