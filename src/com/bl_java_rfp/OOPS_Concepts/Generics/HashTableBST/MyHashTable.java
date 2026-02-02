@@ -14,21 +14,24 @@ public class MyHashTable<K, V> {
         }
     }
 
-    // Get bucket index using hashCode
     private int getIndex(K key) {
         return Math.abs(key.hashCode()) % SIZE;
     }
 
-    // Add or update key-value pair
     public void put(K key, V value) {
         int index = getIndex(key);
         buckets[index].add(key, value);
     }
 
-    // Get value by key
     public V get(K key) {
         int index = getIndex(key);
         return buckets[index].get(key);
+    }
+
+    // UC3: Remove key from HashTable
+    public void remove(K key) {
+        int index = getIndex(key);
+        buckets[index].remove(key);
     }
 
     public void display() {

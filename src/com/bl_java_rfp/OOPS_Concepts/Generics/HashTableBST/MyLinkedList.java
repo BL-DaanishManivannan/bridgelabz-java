@@ -1,12 +1,11 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.HashTableBST;
 
 // LinkedList implementation to store MyMapNode elements
-// Used internally for HashTable operations
+// Supports add, get, remove operations
 public class MyLinkedList<K, V> {
 
     private MyMapNode<K, V> head;
 
-    // Add or update key-value pair
     public void add(K key, V value) {
         MyMapNode<K, V> current = head;
 
@@ -23,7 +22,6 @@ public class MyLinkedList<K, V> {
         head = newNode;
     }
 
-    // Get value by key
     public V get(K key) {
         MyMapNode<K, V> current = head;
         while (current != null) {
@@ -33,6 +31,25 @@ public class MyLinkedList<K, V> {
             current = current.next;
         }
         return null;
+    }
+
+    // UC3: Remove node by key
+    public void remove(K key) {
+        if (head == null) return;
+
+        if (head.key.equals(key)) {
+            head = head.next;
+            return;
+        }
+
+        MyMapNode<K, V> current = head;
+        while (current.next != null) {
+            if (current.next.key.equals(key)) {
+                current.next = current.next.next;
+                return;
+            }
+            current = current.next;
+        }
     }
 
     public void display() {

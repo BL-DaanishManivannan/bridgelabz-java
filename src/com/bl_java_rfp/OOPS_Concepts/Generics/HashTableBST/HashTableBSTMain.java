@@ -1,6 +1,6 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.HashTableBST;
 
-// Main class to demonstrate word frequency in large paragraph
+// Main class to demonstrate removal of a word from HashTable
 public class HashTableBSTMain {
 
     public static void main(String[] args) {
@@ -22,6 +22,9 @@ public class HashTableBSTMain {
                 hashTable.put(word, count + 1);
             }
         }
+
+        // UC3: Remove the word "avoidable"
+        hashTable.remove("avoidable");
 
         hashTable.display();
     }
