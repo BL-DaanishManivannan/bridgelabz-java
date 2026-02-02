@@ -1,24 +1,28 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.HashTableBST;
 
-// Main class to demonstrate word frequency using HashTable
+// Main class to demonstrate word frequency in large paragraph
 public class HashTableBSTMain {
 
     public static void main(String[] args) {
 
-        String sentence = "To be or not to be";
-        String[] words = sentence.toLowerCase().split(" ");
+        String paragraph =
+                "Paranoids are not paranoid because they are paranoid but " +
+                        "because they keep putting themselves deliberately into " +
+                        "paranoid avoidable situations";
 
-        MyLinkedList<String, Integer> list = new MyLinkedList<>();
+        String[] words = paragraph.toLowerCase().split(" ");
+
+        MyHashTable<String, Integer> hashTable = new MyHashTable<>();
 
         for (String word : words) {
-            Integer count = list.get(word);
+            Integer count = hashTable.get(word);
             if (count == null) {
-                list.add(word, 1);
+                hashTable.put(word, 1);
             } else {
-                list.add(word, count + 1);
+                hashTable.put(word, count + 1);
             }
         }
 
-        list.display();
+        hashTable.display();
     }
 }
