@@ -1,16 +1,18 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.BinarySearchTree;
 
-// Main class to demonstrate BST creation
+// Main class to demonstrate BST creation and size validation
 public class BinarySearchTreeMain {
 
     public static void main(String[] args) {
 
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
 
-        bst.add(56);
-        bst.add(30);
-        bst.add(70);
+        int[] nodes = {56, 30, 70, 22, 40, 60, 95, 11, 65, 3, 16, 63, 67};
 
-        System.out.println("BST created with root 56, left 30, right 70");
+        for (int key : nodes) {
+            bst.add(key);
+        }
+
+        System.out.println("Size of BST: " + bst.size());
     }
 }

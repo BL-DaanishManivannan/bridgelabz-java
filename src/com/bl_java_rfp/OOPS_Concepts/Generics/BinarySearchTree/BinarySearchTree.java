@@ -1,12 +1,12 @@
 package com.bl_java_rfp.OOPS_Concepts.Generics.BinarySearchTree;
 
 // Binary Search Tree implementation
-// Supports adding nodes to BST
+// Supports add and size operations
 public class BinarySearchTree<K extends Comparable<K>> {
 
     private BinaryNode<K> root;
 
-    // UC1: Add key to BST
+    // Add key to BST
     public void add(K key) {
         root = addRecursively(root, key);
     }
@@ -23,5 +23,17 @@ public class BinarySearchTree<K extends Comparable<K>> {
         }
 
         return current;
+    }
+
+    // UC2: Get size of BST
+    public int size() {
+        return sizeRecursively(root);
+    }
+
+    private int sizeRecursively(BinaryNode<K> node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + sizeRecursively(node.left) + sizeRecursively(node.right);
     }
 }
