@@ -3,8 +3,8 @@ package com.bl_java_rfp.RegexJava;
 import java.util.regex.Pattern;
 
 /**
- * UC1–UC6 - User Registration Validation
- * Adds password rule 2 validation (at least one uppercase letter).
+ * UC1–UC7 - User Registration Validation
+ * Adds password rule 3 validation (at least one numeric digit).
  */
 public class UserRegistrationValidator {
 
@@ -23,6 +23,9 @@ public class UserRegistrationValidator {
 
     // UC6: Password rule 2 (at least one uppercase letter)
     private static final String PASSWORD_RULE2_REGEX = ".*[A-Z].*";
+
+    // UC7: Password rule 3 (at least one numeric digit)
+    private static final String PASSWORD_RULE3_REGEX = ".*[0-9].*";
 
     public boolean validateFirstName(String firstName) {
         return Pattern.matches(FIRST_NAME_REGEX, firstName);
@@ -44,8 +47,12 @@ public class UserRegistrationValidator {
         return Pattern.matches(PASSWORD_RULE1_REGEX, password);
     }
 
-    // UC6: Password rule 2 validation
     public boolean validatePasswordRule2(String password) {
         return Pattern.matches(PASSWORD_RULE2_REGEX, password);
+    }
+
+    // UC7: Password rule 3 validation
+    public boolean validatePasswordRule3(String password) {
+        return Pattern.matches(PASSWORD_RULE3_REGEX, password);
     }
 }
