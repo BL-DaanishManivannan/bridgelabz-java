@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * UC7–UC10 - Reflection utilities for MoodAnalyser
+ * UC7–UC11 - Reflection utilities for MoodAnalyser
  */
 public class MoodAnalyserFactory {
 
@@ -13,26 +13,26 @@ public class MoodAnalyserFactory {
             throws MoodAnalysisException {
 
         try {
+            // UC11: Class loading
             Class<?> moodClass =
                     Class.forName("com.bl_java_rfp.ExceptionJava.MoodAnalyser.MoodAnalyser");
 
-            // UC10: Constructor lookup
             Constructor<?> constructor =
                     moodClass.getConstructor(String.class);
 
             return (MoodAnalyser) constructor.newInstance(message);
 
-        } catch (NoSuchMethodException e) {
-            // UC10: Constructor not found
-            throw new MoodAnalysisException(
-                    MoodAnalysisExceptionType.EMPTY_MOOD,
-                    "Required constructor not found"
-            );
-
         } catch (ClassNotFoundException e) {
+            // UC11: Class not found
             throw new MoodAnalysisException(
                     MoodAnalysisExceptionType.NULL_MOOD,
                     "MoodAnalyser class not found"
+            );
+
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalysisException(
+                    MoodAnalysisExceptionType.EMPTY_MOOD,
+                    "Required constructor not found"
             );
 
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
@@ -43,7 +43,6 @@ public class MoodAnalyserFactory {
         }
     }
 
-    // UC8 & UC9: Invoke analyseMood() using reflection
     public static String invokeAnalyseMood(MoodAnalyser analyser)
             throws MoodAnalysisException {
 
