@@ -1,26 +1,22 @@
 package com.bl_java_rfp.ExceptionJava.MoodAnalyser;
 
 /**
- * UC1–UC5 - Mood Analysis
- * Handles null mood input using constructor.
+ * UC1–UC6 - Mood Analysis
+ * Validates mood input at object creation time.
  */
 public class MoodAnalyser {
 
     private String message;
 
-    // UC5: Constructor handles null safely
-    public MoodAnalyser(String message) {
+    // UC6: Constructor throws exception for invalid input
+    public MoodAnalyser(String message) throws MoodAnalysisException {
+
         if (message == null) {
-            this.message = "";
-        } else {
-            this.message = message;
+            throw new MoodAnalysisException(
+                    MoodAnalysisExceptionType.NULL_MOOD,
+                    "Mood message is null"
+            );
         }
-    }
-
-    public MoodAnalyser() {
-    }
-
-    public String analyseMood() throws MoodAnalysisException {
 
         if (message.isEmpty()) {
             throw new MoodAnalysisException(
@@ -28,6 +24,11 @@ public class MoodAnalyser {
                     "Mood message is empty"
             );
         }
+
+        this.message = message;
+    }
+
+    public String analyseMood() {
 
         if (message.contains("Sad")) {
             return "SAD";

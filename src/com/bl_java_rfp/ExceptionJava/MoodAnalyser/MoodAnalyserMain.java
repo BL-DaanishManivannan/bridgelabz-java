@@ -10,7 +10,7 @@ public class MoodAnalyserMain {
         System.out.println("Welcome to Mood Analyser Program");
 
         try {
-            MoodAnalyser analyser = new MoodAnalyser("I am in Happy Mood");
+            MoodAnalyser analyser = new MoodAnalyser("I am in Sad Mood");
             System.out.println("Mood: " + analyser.analyseMood());
 
         } catch (MoodAnalysisException e) {
