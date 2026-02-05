@@ -2,9 +2,10 @@ package com.bl_java_rfp.ExceptionJava.MoodAnalyser;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
 
 /**
- * UC7 & UC8 - Reflection utilities for MoodAnalyser
+ * UC7–UC9 - Reflection utilities for MoodAnalyser
  */
 public class MoodAnalyserFactory {
 
@@ -38,10 +39,16 @@ public class MoodAnalyserFactory {
 
             return (String) method.invoke(analyser);
 
-        } catch (Exception e) {
+        } catch (NoSuchMethodException e) {
+            // UC9: Method not found
             throw new MoodAnalysisException(
-                    MoodAnalysisExceptionType.NULL_MOOD,
-                    "Failed to invoke analyseMood() using reflection"
+                    MoodAnalysisExceptionType.EMPTY_MOOD,
+                    "Method analyseMood not found"
+            );
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new MoodAnalysisException(
+                    MoodAnalysisExceptionType.EMPTY_MOOD,
+                    "Unable to invoke analyseMood method"
             );
         }
     }
