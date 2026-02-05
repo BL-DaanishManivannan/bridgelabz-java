@@ -1,7 +1,7 @@
 package com.bl_java_rfp.ExceptionJava.MoodAnalyser;
 
 /**
- * UC0 + Execution wiring
+ * UC0 + Reflection execution
  */
 public class MoodAnalyserMain {
 
@@ -10,7 +10,9 @@ public class MoodAnalyserMain {
         System.out.println("Welcome to Mood Analyser Program");
 
         try {
-            MoodAnalyser analyser = new MoodAnalyser("I am in Sad Mood");
+            MoodAnalyser analyser =
+                    MoodAnalyserFactory.createMoodAnalyser("I am in Happy Mood");
+
             System.out.println("Mood: " + analyser.analyseMood());
 
         } catch (MoodAnalysisException e) {
