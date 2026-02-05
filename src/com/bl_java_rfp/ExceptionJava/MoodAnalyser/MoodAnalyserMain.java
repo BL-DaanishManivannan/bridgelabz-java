@@ -11,9 +11,12 @@ public class MoodAnalyserMain {
 
         try {
             MoodAnalyser analyser =
-                    MoodAnalyserFactory.createMoodAnalyser("I am in Happy Mood");
+                    MoodAnalyserFactory.createMoodAnalyser("I am in Sad Mood");
 
-            System.out.println("Mood: " + analyser.analyseMood());
+            String mood =
+                    MoodAnalyserFactory.invokeAnalyseMood(analyser);
+
+            System.out.println("Mood: " + mood);
 
         } catch (MoodAnalysisException e) {
             System.out.println("Error: " + e.type + " - " + e.getMessage());
