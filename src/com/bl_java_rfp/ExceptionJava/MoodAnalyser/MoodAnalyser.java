@@ -1,15 +1,19 @@
 package com.bl_java_rfp.ExceptionJava.MoodAnalyser;
 
 /**
- * UC1 - Mood Analysis
- * Determines mood based on the input message.
+ * UC1 & UC2 - Mood Analysis
+ * Handles mood analysis and null input using try-catch.
  */
 public class MoodAnalyser {
 
     public String analyseMood(String message) {
 
-        if (message.contains("Sad")) {
-            return "SAD";
+        try {
+            if (message.contains("Sad")) {
+                return "SAD";
+            }
+        } catch (NullPointerException e) {
+            return "HAPPY";
         }
 
         return "HAPPY";
