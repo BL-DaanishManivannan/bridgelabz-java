@@ -1,12 +1,23 @@
 package com.bl_java_rfp.ExceptionJava.MoodAnalyser;
 
 /**
- * UC1–UC3 - Mood Analysis
- * Analyses mood and throws custom exceptions for invalid input.
+ * UC1–UC4 - Mood Analysis
+ * Supports mood analysis using constructor input.
  */
 public class MoodAnalyser {
 
-    public String analyseMood(String message) throws MoodAnalysisException {
+    private String message;
+
+    // UC4: Constructor to accept mood message
+    public MoodAnalyser(String message) {
+        this.message = message;
+    }
+
+    // Default constructor (optional but safe)
+    public MoodAnalyser() {
+    }
+
+    public String analyseMood() throws MoodAnalysisException {
 
         if (message == null) {
             throw new MoodAnalysisException(
