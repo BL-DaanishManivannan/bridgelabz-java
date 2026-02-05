@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 
 /**
- * UC7–UC9 - Reflection utilities for MoodAnalyser
+ * UC7–UC10 - Reflection utilities for MoodAnalyser
  */
 public class MoodAnalyserFactory {
 
@@ -16,20 +16,34 @@ public class MoodAnalyserFactory {
             Class<?> moodClass =
                     Class.forName("com.bl_java_rfp.ExceptionJava.MoodAnalyser.MoodAnalyser");
 
+            // UC10: Constructor lookup
             Constructor<?> constructor =
                     moodClass.getConstructor(String.class);
 
             return (MoodAnalyser) constructor.newInstance(message);
 
-        } catch (Exception e) {
+        } catch (NoSuchMethodException e) {
+            // UC10: Constructor not found
+            throw new MoodAnalysisException(
+                    MoodAnalysisExceptionType.EMPTY_MOOD,
+                    "Required constructor not found"
+            );
+
+        } catch (ClassNotFoundException e) {
             throw new MoodAnalysisException(
                     MoodAnalysisExceptionType.NULL_MOOD,
-                    "Failed to create MoodAnalyser object using reflection"
+                    "MoodAnalyser class not found"
+            );
+
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            throw new MoodAnalysisException(
+                    MoodAnalysisExceptionType.EMPTY_MOOD,
+                    "Unable to create MoodAnalyser object"
             );
         }
     }
 
-    // UC8: Invoke analyseMood() using reflection
+    // UC8 & UC9: Invoke analyseMood() using reflection
     public static String invokeAnalyseMood(MoodAnalyser analyser)
             throws MoodAnalysisException {
 
@@ -40,7 +54,6 @@ public class MoodAnalyserFactory {
             return (String) method.invoke(analyser);
 
         } catch (NoSuchMethodException e) {
-            // UC9: Method not found
             throw new MoodAnalysisException(
                     MoodAnalysisExceptionType.EMPTY_MOOD,
                     "Method analyseMood not found"
