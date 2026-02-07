@@ -6,13 +6,13 @@ import java.util.List;
 
 /**
  * UC3–UC7 - Address Book
- * Prevents duplicate contacts.
+ * Stores, edits, deletes and prevents duplicate contacts.
  */
 public class AddressBook {
 
     private List<Contact> contacts = new ArrayList<>();
 
-    // UC7: Prevent duplicate contacts
+    // UC7: Add contact with duplicate check
     public boolean addContact(Contact contact) {
 
         boolean isDuplicate = contacts.stream()
@@ -26,13 +26,14 @@ public class AddressBook {
         return true;
     }
 
+    // UC3: Edit contact
     public boolean editContact(String firstName, String lastName, Contact updatedContact) {
 
         for (int i = 0; i < contacts.size(); i++) {
             Contact contact = contacts.get(i);
 
-            if (contact.getFirstName().equals(firstName)
-                    && contact.getLastName().equals(lastName)) {
+            if (contact.getFirstName().equalsIgnoreCase(firstName)
+                    && contact.getLastName().equalsIgnoreCase(lastName)) {
 
                 contacts.set(i, updatedContact);
                 return true;
@@ -41,6 +42,7 @@ public class AddressBook {
         return false;
     }
 
+    // UC4: Delete contact
     public boolean deleteContact(String firstName, String lastName) {
 
         Iterator<Contact> iterator = contacts.iterator();
@@ -48,8 +50,8 @@ public class AddressBook {
         while (iterator.hasNext()) {
             Contact contact = iterator.next();
 
-            if (contact.getFirstName().equals(firstName)
-                    && contact.getLastName().equals(lastName)) {
+            if (contact.getFirstName().equalsIgnoreCase(firstName)
+                    && contact.getLastName().equalsIgnoreCase(lastName)) {
 
                 iterator.remove();
                 return true;
@@ -58,13 +60,11 @@ public class AddressBook {
         return false;
     }
 
-    public void displayContacts() {
-        for (Contact contact : contacts) {
-            System.out.println(contact);
-        }
-    }
-
     public List<Contact> getContacts() {
         return contacts;
+    }
+
+    public void displayContacts() {
+        contacts.forEach(System.out::println);
     }
 }

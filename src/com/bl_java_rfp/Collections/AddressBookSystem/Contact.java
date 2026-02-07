@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * UC1 & UC7 - Contact
- * Represents a person and supports duplicate detection.
+ * Represents a person's contact details and prevents duplicates.
  */
 public class Contact {
 
@@ -39,12 +39,18 @@ public class Contact {
         return lastName;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (!(o instanceof Contact)) return false;
-
         Contact contact = (Contact) o;
         return firstName.equalsIgnoreCase(contact.firstName)
                 && lastName.equalsIgnoreCase(contact.lastName);
@@ -57,7 +63,7 @@ public class Contact {
 
     @Override
     public String toString() {
-        return "Contact {" +
+        return "Contact{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", city='" + city + '\'' +
