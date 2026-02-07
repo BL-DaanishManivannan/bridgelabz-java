@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * UC3 & UC4 - Address Book
- * Stores, edits, and deletes contacts.
+ * UC3–UC5 - Address Book
+ * Manages multiple contacts.
  */
 public class AddressBook {
 
@@ -31,7 +31,6 @@ public class AddressBook {
         return false;
     }
 
-    // UC4: Delete contact using name
     public boolean deleteContact(String firstName, String lastName) {
 
         Iterator<Contact> iterator = contacts.iterator();
@@ -49,7 +48,10 @@ public class AddressBook {
         return false;
     }
 
-    public List<Contact> getContacts() {
-        return contacts;
+    // UC5: Display all contacts
+    public void displayContacts() {
+        for (Contact contact : contacts) {
+            System.out.println(contact);
+        }
     }
 }

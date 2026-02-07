@@ -3,8 +3,8 @@ package com.bl_java_rfp.Collections.AddressBookSystem;
 import java.util.Scanner;
 
 /**
- * UC0–UC4 - Address Book Main
- * Adds, edits, and deletes contacts.
+ * UC0–UC5 - Address Book Main
+ * Supports adding multiple contacts.
  */
 public class AddressBookMain {
 
@@ -15,54 +15,47 @@ public class AddressBookMain {
         Scanner scanner = new Scanner(System.in);
         AddressBook addressBook = new AddressBook();
 
-        // UC2: Add contact
-        System.out.print("Enter First Name: ");
-        String firstName = scanner.nextLine();
+        String choice;
 
-        System.out.print("Enter Last Name: ");
-        String lastName = scanner.nextLine();
+        do {
+            System.out.print("\nEnter First Name: ");
+            String firstName = scanner.nextLine();
 
-        System.out.print("Enter Address: ");
-        String address = scanner.nextLine();
+            System.out.print("Enter Last Name: ");
+            String lastName = scanner.nextLine();
 
-        System.out.print("Enter City: ");
-        String city = scanner.nextLine();
+            System.out.print("Enter Address: ");
+            String address = scanner.nextLine();
 
-        System.out.print("Enter State: ");
-        String state = scanner.nextLine();
+            System.out.print("Enter City: ");
+            String city = scanner.nextLine();
 
-        System.out.print("Enter Zip: ");
-        String zip = scanner.nextLine();
+            System.out.print("Enter State: ");
+            String state = scanner.nextLine();
 
-        System.out.print("Enter Phone Number: ");
-        String phoneNumber = scanner.nextLine();
+            System.out.print("Enter Zip: ");
+            String zip = scanner.nextLine();
 
-        System.out.print("Enter Email: ");
-        String email = scanner.nextLine();
+            System.out.print("Enter Phone Number: ");
+            String phoneNumber = scanner.nextLine();
 
-        Contact contact = new Contact(
-                firstName, lastName,
-                address, city, state,
-                zip, phoneNumber, email
-        );
+            System.out.print("Enter Email: ");
+            String email = scanner.nextLine();
 
-        addressBook.addContact(contact);
+            Contact contact = new Contact(
+                    firstName, lastName,
+                    address, city, state,
+                    zip, phoneNumber, email
+            );
 
-        // UC4: Delete contact
-        System.out.print("\nEnter First Name of contact to delete: ");
-        String deleteFirstName = scanner.nextLine();
+            addressBook.addContact(contact);
 
-        System.out.print("Enter Last Name of contact to delete: ");
-        String deleteLastName = scanner.nextLine();
+            System.out.print("\nDo you want to add another contact? (yes/no): ");
+            choice = scanner.nextLine();
 
-        boolean isDeleted = addressBook.deleteContact(
-                deleteFirstName, deleteLastName
-        );
+        } while (choice.equalsIgnoreCase("yes"));
 
-        if (isDeleted) {
-            System.out.println("\nContact Deleted Successfully");
-        } else {
-            System.out.println("\nContact Not Found");
-        }
+        System.out.println("\nAll Contacts in Address Book:");
+        addressBook.displayContacts();
     }
 }
