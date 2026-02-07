@@ -3,8 +3,8 @@ package com.bl_java_rfp.Collections.AddressBookSystem;
 import java.util.Scanner;
 
 /**
- * UC0 & UC2 - Address Book Main
- * Accepts user input and creates a Contact.
+ * UC0–UC3 - Address Book Main
+ * Adds and edits contacts.
  */
 public class AddressBookMain {
 
@@ -13,7 +13,9 @@ public class AddressBookMain {
         System.out.println("Welcome to Address Book Program");
 
         Scanner scanner = new Scanner(System.in);
+        AddressBook addressBook = new AddressBook();
 
+        // UC2: Add contact
         System.out.print("Enter First Name: ");
         String firstName = scanner.nextLine();
 
@@ -44,7 +46,32 @@ public class AddressBookMain {
                 zip, phoneNumber, email
         );
 
-        System.out.println("\nContact Added Successfully:");
-        System.out.println(contact);
+        addressBook.addContact(contact);
+
+        // UC3: Edit contact
+        System.out.print("\nEnter First Name of contact to edit: ");
+        String editFirstName = scanner.nextLine();
+
+        System.out.print("Enter Last Name of contact to edit: ");
+        String editLastName = scanner.nextLine();
+
+        System.out.print("Enter New City: ");
+        String newCity = scanner.nextLine();
+
+        Contact updatedContact = new Contact(
+                firstName, lastName,
+                address, newCity, state,
+                zip, phoneNumber, email
+        );
+
+        boolean isUpdated = addressBook.editContact(
+                editFirstName, editLastName, updatedContact
+        );
+
+        if (isUpdated) {
+            System.out.println("\nContact Updated Successfully");
+        } else {
+            System.out.println("\nContact Not Found");
+        }
     }
 }
