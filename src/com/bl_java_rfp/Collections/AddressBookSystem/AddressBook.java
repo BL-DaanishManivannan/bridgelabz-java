@@ -5,15 +5,25 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * UC3–UC5 - Address Book
- * Manages multiple contacts.
+ * UC3–UC7 - Address Book
+ * Prevents duplicate contacts.
  */
 public class AddressBook {
 
     private List<Contact> contacts = new ArrayList<>();
 
-    public void addContact(Contact contact) {
+    // UC7: Prevent duplicate contacts
+    public boolean addContact(Contact contact) {
+
+        boolean isDuplicate = contacts.stream()
+                .anyMatch(existing -> existing.equals(contact));
+
+        if (isDuplicate) {
+            return false;
+        }
+
         contacts.add(contact);
+        return true;
     }
 
     public boolean editContact(String firstName, String lastName, Contact updatedContact) {
@@ -48,10 +58,13 @@ public class AddressBook {
         return false;
     }
 
-    // UC5: Display all contacts
     public void displayContacts() {
         for (Contact contact : contacts) {
             System.out.println(contact);
         }
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
     }
 }

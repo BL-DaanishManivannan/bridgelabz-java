@@ -3,8 +3,8 @@ package com.bl_java_rfp.Collections.AddressBookSystem;
 import java.util.Scanner;
 
 /**
- * UC0–UC6 - Address Book Main
- * Supports multiple address books.
+ * UC0–UC7 - Address Book Main
+ * Prevents duplicate contact entries.
  */
 public class AddressBookMain {
 
@@ -19,12 +19,7 @@ public class AddressBookMain {
         String bookName = scanner.nextLine();
 
         AddressBook addressBook = new AddressBook();
-        boolean isAdded = manager.addAddressBook(bookName, addressBook);
-
-        if (!isAdded) {
-            System.out.println("Address Book already exists");
-            return;
-        }
+        manager.addAddressBook(bookName, addressBook);
 
         String choice;
         do {
@@ -58,14 +53,18 @@ public class AddressBookMain {
                     zip, phoneNumber, email
             );
 
-            addressBook.addContact(contact);
+            boolean isAdded = addressBook.addContact(contact);
+
+            if (!isAdded) {
+                System.out.println("Duplicate Contact Found. Not Added.");
+            }
 
             System.out.print("\nAdd another contact? (yes/no): ");
             choice = scanner.nextLine();
 
         } while (choice.equalsIgnoreCase("yes"));
 
-        System.out.println("\nAvailable Address Books:");
-        manager.displayAddressBooks();
+        System.out.println("\nAll Contacts:");
+        addressBook.displayContacts();
     }
 }
