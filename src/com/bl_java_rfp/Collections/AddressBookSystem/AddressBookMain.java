@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * UC0–UC9 - Address Book Main
- * Entry point and execution flow.
+ * UC0–UC10 - Address Book Main
+ * Demonstrates counting persons by city and state.
  */
 public class AddressBookMain {
 
@@ -65,30 +65,18 @@ public class AddressBookMain {
 
         } while (choice.equalsIgnoreCase("yes"));
 
-        // UC8: Search
-        System.out.print("\nEnter City to search: ");
-        String searchCity = scanner.nextLine();
-        List<Contact> cityResults = manager.searchPersonsByCity(searchCity);
-        cityResults.forEach(System.out::println);
+        // UC10: Count by City
+        System.out.println("\nCount of Persons by City:");
+        Map<String, Long> countByCity = manager.countPersonsByCity();
+        countByCity.forEach((city, count) ->
+                System.out.println(city + " -> " + count)
+        );
 
-        System.out.print("\nEnter State to search: ");
-        String searchState = scanner.nextLine();
-        List<Contact> stateResults = manager.searchPersonsByState(searchState);
-        stateResults.forEach(System.out::println);
-
-        // UC9: View grouped
-        System.out.println("\nPersons Grouped by City:");
-        Map<String, List<Contact>> byCity = manager.viewPersonsByCity();
-        byCity.forEach((city, contacts) -> {
-            System.out.println("City: " + city);
-            contacts.forEach(System.out::println);
-        });
-
-        System.out.println("\nPersons Grouped by State:");
-        Map<String, List<Contact>> byState = manager.viewPersonsByState();
-        byState.forEach((state, contacts) -> {
-            System.out.println("State: " + state);
-            contacts.forEach(System.out::println);
-        });
+        // UC10: Count by State
+        System.out.println("\nCount of Persons by State:");
+        Map<String, Long> countByState = manager.countPersonsByState();
+        countByState.forEach((state, count) ->
+                System.out.println(state + " -> " + count)
+        );
     }
 }
