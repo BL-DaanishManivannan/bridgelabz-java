@@ -1,11 +1,12 @@
 package com.bl_java_rfp.Collections.AddressBookSystem;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
- * UC3 - Address Book
- * Stores and manages contacts.
+ * UC3 & UC4 - Address Book
+ * Stores, edits, and deletes contacts.
  */
 public class AddressBook {
 
@@ -24,6 +25,24 @@ public class AddressBook {
                     && contact.getLastName().equals(lastName)) {
 
                 contacts.set(i, updatedContact);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // UC4: Delete contact using name
+    public boolean deleteContact(String firstName, String lastName) {
+
+        Iterator<Contact> iterator = contacts.iterator();
+
+        while (iterator.hasNext()) {
+            Contact contact = iterator.next();
+
+            if (contact.getFirstName().equals(firstName)
+                    && contact.getLastName().equals(lastName)) {
+
+                iterator.remove();
                 return true;
             }
         }

@@ -3,8 +3,8 @@ package com.bl_java_rfp.Collections.AddressBookSystem;
 import java.util.Scanner;
 
 /**
- * UC0–UC3 - Address Book Main
- * Adds and edits contacts.
+ * UC0–UC4 - Address Book Main
+ * Adds, edits, and deletes contacts.
  */
 public class AddressBookMain {
 
@@ -48,28 +48,19 @@ public class AddressBookMain {
 
         addressBook.addContact(contact);
 
-        // UC3: Edit contact
-        System.out.print("\nEnter First Name of contact to edit: ");
-        String editFirstName = scanner.nextLine();
+        // UC4: Delete contact
+        System.out.print("\nEnter First Name of contact to delete: ");
+        String deleteFirstName = scanner.nextLine();
 
-        System.out.print("Enter Last Name of contact to edit: ");
-        String editLastName = scanner.nextLine();
+        System.out.print("Enter Last Name of contact to delete: ");
+        String deleteLastName = scanner.nextLine();
 
-        System.out.print("Enter New City: ");
-        String newCity = scanner.nextLine();
-
-        Contact updatedContact = new Contact(
-                firstName, lastName,
-                address, newCity, state,
-                zip, phoneNumber, email
+        boolean isDeleted = addressBook.deleteContact(
+                deleteFirstName, deleteLastName
         );
 
-        boolean isUpdated = addressBook.editContact(
-                editFirstName, editLastName, updatedContact
-        );
-
-        if (isUpdated) {
-            System.out.println("\nContact Updated Successfully");
+        if (isDeleted) {
+            System.out.println("\nContact Deleted Successfully");
         } else {
             System.out.println("\nContact Not Found");
         }
