@@ -1,10 +1,11 @@
 package com.bl_java_rfp.Collections.AddressBookSystem;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
- * UC0–UC7 - Address Book Main
- * Prevents duplicate contact entries.
+ * UC0–UC8 - Address Book Main
+ * Supports search by city or state.
  */
 public class AddressBookMain {
 
@@ -53,18 +54,27 @@ public class AddressBookMain {
                     zip, phoneNumber, email
             );
 
-            boolean isAdded = addressBook.addContact(contact);
-
-            if (!isAdded) {
-                System.out.println("Duplicate Contact Found. Not Added.");
-            }
+            addressBook.addContact(contact);
 
             System.out.print("\nAdd another contact? (yes/no): ");
             choice = scanner.nextLine();
 
         } while (choice.equalsIgnoreCase("yes"));
 
-        System.out.println("\nAll Contacts:");
-        addressBook.displayContacts();
+        // UC8: Search by City
+        System.out.print("\nEnter City to search: ");
+        String searchCity = scanner.nextLine();
+
+        List<Contact> cityResults = manager.searchPersonsByCity(searchCity);
+        System.out.println("\nPersons in City:");
+        cityResults.forEach(System.out::println);
+
+        // UC8: Search by State
+        System.out.print("\nEnter State to search: ");
+        String searchState = scanner.nextLine();
+
+        List<Contact> stateResults = manager.searchPersonsByState(searchState);
+        System.out.println("\nPersons in State:");
+        stateResults.forEach(System.out::println);
     }
 }
