@@ -1,7 +1,11 @@
 package com.bl_java_rfp.LambdaExp;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
+
 /**
- * UC0 → UC1.2
+ * UC0 → UC1.3
  */
 public class LambdaExpressionMain {
 
@@ -9,16 +13,40 @@ public class LambdaExpressionMain {
 
         System.out.println("Welcome to Java 8 Lambda Expressions Program");
 
+        // ===== UC1.1 & UC1.2 =====
         MathOperation addition = (a, b) -> a + b;
         MathOperation subtraction = (a, b) -> a - b;
         MathOperation division = (a, b) -> a / b;
 
-        int num1 = 10;
-        int num2 = 5;
+        MathOperation.printResult(10, 5, "Addition", addition);
+        MathOperation.printResult(10, 5, "Subtraction", subtraction);
+        MathOperation.printResult(10, 5, "Division", division);
 
-        // UC1.2: Passing lambda as parameter
-        MathOperation.printResult(num1, num2, "Addition", addition);
-        MathOperation.printResult(num1, num2, "Subtraction", subtraction);
-        MathOperation.printResult(num1, num2, "Division", division);
+        // ===== UC1.3 =====
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+        System.out.println("\nMethod 1: Proper Class");
+
+        class MyConsumer implements Consumer<Integer> {
+            @Override
+            public void accept(Integer n) {
+                System.out.println("Value: " + n);
+            }
+        }
+
+        numbers.forEach(new MyConsumer());
+
+        System.out.println("\nMethod 2: Anonymous Class");
+
+        numbers.forEach(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer n) {
+                System.out.println("Value: " + n);
+            }
+        });
+
+        System.out.println("\nMethod 3: Lambda Expression");
+
+        numbers.forEach(n -> System.out.println("Value: " + n));
     }
 }
