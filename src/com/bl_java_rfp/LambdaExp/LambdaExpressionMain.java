@@ -44,7 +44,15 @@ public class LambdaExpressionMain {
             Double converted = convertToDouble.apply(n);
             System.out.println("Original: " + n + " | Double: " + converted);
         });
+        // ===== UC1.5 =====
+        System.out.println("\nUC1.5: Print Only Even Numbers");
 
+        java.util.function.Predicate<Integer> isEven =
+                number -> number % 2 == 0;
+
+        numbers.stream()
+                .filter(isEven)
+                .forEach(n -> System.out.println("Even Number: " + n));
         numbers.forEach(new MyConsumer());
 
         System.out.println("\nMethod 2: Anonymous Class");
