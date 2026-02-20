@@ -34,6 +34,17 @@ public class LambdaExpressionMain {
             }
         }
 
+        // ===== UC1.4 =====
+        System.out.println("\nUC1.4: Convert Integer to Double");
+
+        java.util.function.Function<Integer, Double> convertToDouble =
+                number -> number.doubleValue();
+
+        numbers.forEach(n -> {
+            Double converted = convertToDouble.apply(n);
+            System.out.println("Original: " + n + " | Double: " + converted);
+        });
+
         numbers.forEach(new MyConsumer());
 
         System.out.println("\nMethod 2: Anonymous Class");
