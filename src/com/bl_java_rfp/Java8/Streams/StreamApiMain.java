@@ -76,5 +76,40 @@ public class StreamApiMain {
 
         maxEven.ifPresent(value ->
                 System.out.println("Maximum Even Number: " + value));
+
+        // ===== UC2.6 =====
+        System.out.println("\nUC2.6: Find min and max even numbers");
+
+        java.util.Optional<Integer> minEven = numbers.stream()
+                .filter(number -> number % 2 == 0)
+                .min(java.util.Comparator.naturalOrder());
+
+        java.util.Optional<Integer> maxEven = numbers.stream()
+                .filter(number -> number % 2 == 0)
+                .max(java.util.Comparator.naturalOrder());
+
+        minEven.ifPresent(value ->
+                System.out.println("Minimum Even Number: " + value));
+
+        maxEven.ifPresent(value ->
+                System.out.println("Maximum Even Number: " + value));
+
+        // ===== UC2.7 =====
+        System.out.println("\nUC2.7: Find sum and average");
+
+        int sum = numbers.stream()
+                .reduce(0, (a, b) -> a + b);
+
+        System.out.println("Sum: " + sum);
+
+        java.util.OptionalDouble average = numbers.stream()
+                .mapToInt(number -> number)
+                .average();
+
+        if (average.isPresent()) {
+            System.out.println("Average: " + average.getAsDouble());
+        } else {
+            System.out.println("No values present to calculate average");
+        }
     }
 }
