@@ -127,5 +127,14 @@ public class StreamApiMain {
         System.out.println("All numbers even? " + allEven);
         System.out.println("Any number even? " + anyEven);
         System.out.println("No negative numbers? " + noneNegative);
+
+        // ===== UC2.9 =====
+        System.out.println("\nUC2.9: Sort numbers in ascending order");
+
+        java.util.List<Integer> sortedNumbers = numbers.stream()
+                .sorted()
+                .collect(java.util.stream.Collectors.toList());
+
+        System.out.println("Sorted Numbers: " + sortedNumbers);
     }
 }
