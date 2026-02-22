@@ -28,5 +28,14 @@ public class StreamApiMain {
         numbers.stream()
                 .map(number -> number.doubleValue())
                 .forEach(d -> System.out.println("Double Value: " + d));
+
+        // ===== UC2.3 =====
+        System.out.println("\nUC2.3: Store transformed double values into new List");
+
+        java.util.List<Double> doubleList = numbers.stream()
+                .map(number -> number.doubleValue())
+                .collect(java.util.stream.Collectors.toList());
+
+        System.out.println("Collected Double List: " + doubleList);
     }
 }
