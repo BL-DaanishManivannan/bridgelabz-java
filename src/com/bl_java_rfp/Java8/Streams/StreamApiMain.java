@@ -59,5 +59,22 @@ public class StreamApiMain {
         } else {
             System.out.println("No Even Number Found");
         }
+
+        // ===== UC2.6 =====
+        System.out.println("\nUC2.6: Find min and max even numbers");
+
+        java.util.Optional<Integer> minEven = numbers.stream()
+                .filter(number -> number % 2 == 0)
+                .min(java.util.Comparator.naturalOrder());
+
+        java.util.Optional<Integer> maxEven = numbers.stream()
+                .filter(number -> number % 2 == 0)
+                .max(java.util.Comparator.naturalOrder());
+
+        minEven.ifPresent(value ->
+                System.out.println("Minimum Even Number: " + value));
+
+        maxEven.ifPresent(value ->
+                System.out.println("Maximum Even Number: " + value));
     }
 }
