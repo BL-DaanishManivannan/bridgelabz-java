@@ -21,5 +21,12 @@ public class StreamApiMain {
 
         numbers.stream()
                 .forEach(number -> System.out.println("Value: " + number));
+
+        // ===== UC2.2 =====
+        System.out.println("\nUC2.2: Transform each element to Double using map()");
+
+        numbers.stream()
+                .map(number -> number.doubleValue())
+                .forEach(d -> System.out.println("Double Value: " + d));
     }
 }
