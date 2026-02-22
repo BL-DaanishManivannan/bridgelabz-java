@@ -37,5 +37,14 @@ public class StreamApiMain {
                 .collect(java.util.stream.Collectors.toList());
 
         System.out.println("Collected Double List: " + doubleList);
+
+        // ===== UC2.4 =====
+        System.out.println("\nUC2.4: Filter even numbers");
+
+        java.util.List<Integer> evenNumbers = numbers.stream()
+                .filter(number -> number % 2 == 0)
+                .collect(java.util.stream.Collectors.toList());
+
+        System.out.println("Even Numbers: " + evenNumbers);
     }
 }
