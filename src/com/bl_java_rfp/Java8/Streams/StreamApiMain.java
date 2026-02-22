@@ -111,5 +111,21 @@ public class StreamApiMain {
         } else {
             System.out.println("No values present to calculate average");
         }
+
+        // ===== UC2.8 =====
+        System.out.println("\nUC2.8: Match operations");
+
+        boolean allEven = numbers.stream()
+                .allMatch(number -> number % 2 == 0);
+
+        boolean anyEven = numbers.stream()
+                .anyMatch(number -> number % 2 == 0);
+
+        boolean noneNegative = numbers.stream()
+                .noneMatch(number -> number < 0);
+
+        System.out.println("All numbers even? " + allEven);
+        System.out.println("Any number even? " + anyEven);
+        System.out.println("No negative numbers? " + noneNegative);
     }
 }
