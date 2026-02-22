@@ -46,5 +46,18 @@ public class StreamApiMain {
                 .collect(java.util.stream.Collectors.toList());
 
         System.out.println("Even Numbers: " + evenNumbers);
+
+        // ===== UC2.5 =====
+        System.out.println("\nUC2.5: Find first even number");
+
+        java.util.Optional<Integer> firstEven = numbers.stream()
+                .filter(number -> number % 2 == 0)
+                .findFirst();
+
+        if (firstEven.isPresent()) {
+            System.out.println("First Even Number: " + firstEven.get());
+        } else {
+            System.out.println("No Even Number Found");
+        }
     }
 }
