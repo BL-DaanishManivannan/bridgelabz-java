@@ -1,10 +1,10 @@
 package com.bl_java_rfp.Java8.Streams;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
- * UC0 → UC2.1
+ * UC0 → UC2.9 Stream API Operations
  */
 public class StreamApiMain {
 
@@ -12,129 +12,73 @@ public class StreamApiMain {
 
         System.out.println("Welcome to Java 8 Streams API Program");
 
-        List<Integer> numbers = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
-
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         System.out.println("Initial Numbers: " + numbers);
 
-        // ===== UC2.1 =====
+        // ===== UC2.1: Internal Iteration =====
         System.out.println("\nUC2.1: Iterate using stream.forEach");
+        numbers.stream().forEach(number -> System.out.println("Value: " + number));
 
-        numbers.stream()
-                .forEach(number -> System.out.println("Value: " + number));
-
-        // ===== UC2.2 =====
+        // ===== UC2.2: Map (Transformation) =====
         System.out.println("\nUC2.2: Transform each element to Double using map()");
-
         numbers.stream()
-                .map(number -> number.doubleValue())
+                .map(Integer::doubleValue) // Using Method Reference
                 .forEach(d -> System.out.println("Double Value: " + d));
 
-        // ===== UC2.3 =====
+        // ===== UC2.3: Collect to List =====
         System.out.println("\nUC2.3: Store transformed double values into new List");
-
-        java.util.List<Double> doubleList = numbers.stream()
-                .map(number -> number.doubleValue())
-                .collect(java.util.stream.Collectors.toList());
-
+        List<Double> doubleList = numbers.stream()
+                .map(Integer::doubleValue)
+                .collect(Collectors.toList());
         System.out.println("Collected Double List: " + doubleList);
 
-        // ===== UC2.4 =====
+        // ===== UC2.4: Filter =====
         System.out.println("\nUC2.4: Filter even numbers");
-
-        java.util.List<Integer> evenNumbers = numbers.stream()
-                .filter(number -> number % 2 == 0)
-                .collect(java.util.stream.Collectors.toList());
-
+        List<Integer> evenNumbers = numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .collect(Collectors.toList());
         System.out.println("Even Numbers: " + evenNumbers);
 
-        // ===== UC2.5 =====
+        // ===== UC2.5: Find First =====
         System.out.println("\nUC2.5: Find first even number");
+        numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .findFirst()
+                .ifPresent(val -> System.out.println("First Even Number: " + val));
 
-        java.util.Optional<Integer> firstEven = numbers.stream()
-                .filter(number -> number % 2 == 0)
-                .findFirst();
-
-        if (firstEven.isPresent()) {
-            System.out.println("First Even Number: " + firstEven.get());
-        } else {
-            System.out.println("No Even Number Found");
-        }
-
-        // ===== UC2.6 =====
+        // ===== UC2.6: Min and Max =====
         System.out.println("\nUC2.6: Find min and max even numbers");
+        numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .min(Comparator.naturalOrder())
+                .ifPresent(min -> System.out.println("Minimum Even Number: " + min));
 
-        java.util.Optional<Integer> minEven = numbers.stream()
-                .filter(number -> number % 2 == 0)
-                .min(java.util.Comparator.naturalOrder());
+        numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .max(Comparator.naturalOrder())
+                .ifPresent(max -> System.out.println("Maximum Even Number: " + max));
 
-        java.util.Optional<Integer> maxEven = numbers.stream()
-                .filter(number -> number % 2 == 0)
-                .max(java.util.Comparator.naturalOrder());
-
-        minEven.ifPresent(value ->
-                System.out.println("Minimum Even Number: " + value));
-
-        maxEven.ifPresent(value ->
-                System.out.println("Maximum Even Number: " + value));
-
-        // ===== UC2.6 =====
-        System.out.println("\nUC2.6: Find min and max even numbers");
-
-        java.util.Optional<Integer> minEven = numbers.stream()
-                .filter(number -> number % 2 == 0)
-                .min(java.util.Comparator.naturalOrder());
-
-        java.util.Optional<Integer> maxEven = numbers.stream()
-                .filter(number -> number % 2 == 0)
-                .max(java.util.Comparator.naturalOrder());
-
-        minEven.ifPresent(value ->
-                System.out.println("Minimum Even Number: " + value));
-
-        maxEven.ifPresent(value ->
-                System.out.println("Maximum Even Number: " + value));
-
-        // ===== UC2.7 =====
+        // ===== UC2.7: Reduce (Sum) and Average =====
         System.out.println("\nUC2.7: Find sum and average");
-
-        int sum = numbers.stream()
-                .reduce(0, (a, b) -> a + b);
-
+        int sum = numbers.stream().reduce(0, Integer::sum);
         System.out.println("Sum: " + sum);
 
-        java.util.OptionalDouble average = numbers.stream()
-                .mapToInt(number -> number)
-                .average();
+        numbers.stream()
+                .mapToInt(Integer::intValue)
+                .average()
+                .ifPresent(avg -> System.out.println("Average: " + avg));
 
-        if (average.isPresent()) {
-            System.out.println("Average: " + average.getAsDouble());
-        } else {
-            System.out.println("No values present to calculate average");
-        }
-
-        // ===== UC2.8 =====
+        // ===== UC2.8: Match Operations =====
         System.out.println("\nUC2.8: Match operations");
+        System.out.println("All numbers even? " + numbers.stream().allMatch(n -> n % 2 == 0));
+        System.out.println("Any number even? " + numbers.stream().anyMatch(n -> n % 2 == 0));
+        System.out.println("No negative numbers? " + numbers.stream().noneMatch(n -> n < 0));
 
-        boolean allEven = numbers.stream()
-                .allMatch(number -> number % 2 == 0);
-
-        boolean anyEven = numbers.stream()
-                .anyMatch(number -> number % 2 == 0);
-
-        boolean noneNegative = numbers.stream()
-                .noneMatch(number -> number < 0);
-
-        System.out.println("All numbers even? " + allEven);
-        System.out.println("Any number even? " + anyEven);
-        System.out.println("No negative numbers? " + noneNegative);
-
-        // ===== UC2.9 =====
+        // ===== UC2.9: Sorting =====
         System.out.println("\nUC2.9: Sort numbers in ascending order");
-
-        java.util.List<Integer> sortedNumbers = numbers.stream()
+        List<Integer> sortedNumbers = numbers.stream()
                 .sorted()
-                .collect(java.util.stream.Collectors.toList());
-
+                .collect(Collectors.toList());
         System.out.println("Sorted Numbers: " + sortedNumbers);
     }
 }
