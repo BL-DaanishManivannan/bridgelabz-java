@@ -1,5 +1,7 @@
 package com.bl_java_rfp.FileIO.AddressBook;
 
+import java.util.List;
+
 public class AddressBookMain {
 
     public static void main(String[] args) {
@@ -7,7 +9,6 @@ public class AddressBookMain {
 
         AddressBookSystem system = new AddressBookSystem();
         system.addAddressBook("Friends");
-        system.addAddressBook("Work");
 
         AddressBook friendsBook = system.getAddressBook("Friends");
         friendsBook.addContact(new Contact("John", "Doe",
@@ -16,33 +17,21 @@ public class AddressBookMain {
         friendsBook.addContact(new Contact("Jane", "Smith",
                 "456 Oak Ave", "Orlando", "Florida",
                 "32801", "9123456789", "jane@email.com"));
-
-        AddressBook workBook = system.getAddressBook("Work");
-        workBook.addContact(new Contact("Alice", "Brown",
+        friendsBook.addContact(new Contact("Alice", "Brown",
                 "789 Corp Blvd", "Miami", "Florida",
                 "33102", "9000000001", "alice@work.com"));
-        workBook.addContact(new Contact("Bob", "White",
-                "101 Biz Lane", "Tampa", "Florida",
-                "33601", "9000000002", "bob@work.com"));
 
-        // UC8 — Search
-        system.searchByCity("Miami");
-        system.searchByState("Florida");
+        System.out.println("\n--- Contacts Before Write ---");
+        friendsBook.displayAllContacts();
 
-        // UC9 — Group
-        system.viewGroupedByCity();
-        system.viewGroupedByState();
+        // UC13 — Write to file
+        FileIOService fileIOService = new FileIOService();
+        fileIOService.writeToFile(friendsBook);
 
-        // UC10 — Count
-        system.countByCity();
-        system.countByState();
+        // UC13 — Read from file
+        List<Contact> contactsFromFile = fileIOService.readFromFile();
 
-        // UC11 — Sort by Name
-        system.sortByName();
-
-        // UC12 — Sort by City, State, Zip
-        system.sortByCity();
-        system.sortByState();
-        system.sortByZip();
+        System.out.println("\n--- Contacts Read From File ---");
+        contactsFromFile.forEach(System.out::println);
     }
 }
