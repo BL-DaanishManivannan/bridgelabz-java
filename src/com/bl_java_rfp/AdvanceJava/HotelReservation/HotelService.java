@@ -100,4 +100,14 @@ public class HotelService {
                 .max(Comparator.comparingInt(Hotel::getRating))
                 .orElse(null);
     }
+    // Stream-based cheapest best-rated for regular customer
+    public Hotel findCheapestBestRatedHotelForRegular(long weekdays, long weekends) {
+        return hotels.stream()
+                .sorted(Comparator
+                        .comparingInt((Hotel h) ->
+                                calculateTotalRate(h, weekdays, weekends))
+                        .thenComparingInt(h -> -h.getRating()))
+                .findFirst()
+                .orElse(null);
+    }
 }

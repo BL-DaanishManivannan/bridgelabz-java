@@ -16,21 +16,39 @@ public class HotelReservation {
         HotelService hotelService = new HotelService(hotelList);
 
         try {
-            // I/P: Rewards: 11Sep2020(Fri), 12Sep2020(Sat)
-            String input = "Rewards: 11Sep2020(Fri), 12Sep2020(Sat)";
-            String[] dates = hotelService.parseInput(input);
+            // UC11 — Rewards Customer
+            String rewardsInput = "Rewards: 11Sep2020(Fri), 12Sep2020(Sat)";
+            String[] rewardsDates = hotelService.parseInput(rewardsInput);
 
-            long weekdays = hotelService.countWeekdays(dates);
-            long weekends = hotelService.countWeekends(dates);
+            long rewardsWeekdays = hotelService.countWeekdays(rewardsDates);
+            long rewardsWeekends = hotelService.countWeekends(rewardsDates);
 
-            Hotel cheapestBestRated = hotelService
-                    .findCheapestBestRatedHotelForRewards(weekdays, weekends);
-            int totalRate = hotelService
-                    .calculateRewardsTotalRate(cheapestBestRated, weekdays, weekends);
+            Hotel cheapestRewards = hotelService
+                    .findCheapestBestRatedHotelForRewards(rewardsWeekdays, rewardsWeekends);
+            int rewardsTotal = hotelService
+                    .calculateRewardsTotalRate(cheapestRewards, rewardsWeekdays, rewardsWeekends);
 
-            System.out.println("Cheapest Best Rated Hotel: " + cheapestBestRated.getName()
-                    + " | Rating: " + cheapestBestRated.getRating()
-                    + " | Total Rates: $" + totalRate);
+            System.out.println("Rewards Customer:");
+            System.out.println("Cheapest Best Rated Hotel: " + cheapestRewards.getName()
+                    + " | Rating: " + cheapestRewards.getRating()
+                    + " | Total Rates: $" + rewardsTotal);
+
+            // UC12 — Regular Customer
+            String regularInput = "Regular: 11Sep2020(Fri), 12Sep2020(Sat)";
+            String[] regularDates = hotelService.parseInput(regularInput);
+
+            long regularWeekdays = hotelService.countWeekdays(regularDates);
+            long regularWeekends = hotelService.countWeekends(regularDates);
+
+            Hotel cheapestRegular = hotelService
+                    .findCheapestBestRatedHotelForRegular(regularWeekdays, regularWeekends);
+            int regularTotal = hotelService
+                    .calculateTotalRate(cheapestRegular, regularWeekdays, regularWeekends);
+
+            System.out.println("\nRegular Customer:");
+            System.out.println("Cheapest Best Rated Hotel: " + cheapestRegular.getName()
+                    + " | Rating: " + cheapestRegular.getRating()
+                    + " | Total Rates: $" + regularTotal);
 
         } catch (HotelReservationException e) {
             System.out.println("Error: " + e.getMessage());
