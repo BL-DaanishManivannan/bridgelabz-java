@@ -10,6 +10,33 @@ public class HotelService {
         this.hotels = hotels;
     }
 
+    public int countWeekdays(String[] dates) {
+        int count = 0;
+        for (String date : dates) {
+            String day = extractDay(date).toLowerCase();
+            if (!day.equals("sat") && !day.equals("sun")) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int countWeekends(String[] dates) {
+        int count = 0;
+        for (String date : dates) {
+            String day = extractDay(date).toLowerCase();
+            if (day.equals("sat") || day.equals("sun")) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    // Extracts day abbreviation from format: 11Sep2020(Fri)
+    private String extractDay(String date) {
+        return date.substring(date.indexOf("(") + 1, date.indexOf(")"));
+    }
+
     public Hotel findCheapestHotel(int weekdays, int weekends) {
         Hotel cheapestHotel = null;
         int lowestTotal = Integer.MAX_VALUE;
