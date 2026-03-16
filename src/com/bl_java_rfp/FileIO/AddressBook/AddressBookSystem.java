@@ -95,6 +95,41 @@ public class AddressBookSystem {
                 .forEach((state, count) ->
                         System.out.println("State: " + state + " | Count: " + count));
     }
+    // UC11 — Sort all contacts alphabetically by First Name
+    public void sortByName() {
+        System.out.println("\n--- Contacts Sorted by Name ---");
+        addressBookMap.values().stream()
+                .flatMap(book -> book.getContacts().stream())
+                .sorted(Comparator.comparing(Contact::getFirstName))
+                .forEach(System.out::println);
+    }
+
+    // UC12 — Sort all contacts by City
+    public void sortByCity() {
+        System.out.println("\n--- Contacts Sorted by City ---");
+        addressBookMap.values().stream()
+                .flatMap(book -> book.getContacts().stream())
+                .sorted(Comparator.comparing(Contact::getCity))
+                .forEach(System.out::println);
+    }
+
+    // UC12 — Sort all contacts by State
+    public void sortByState() {
+        System.out.println("\n--- Contacts Sorted by State ---");
+        addressBookMap.values().stream()
+                .flatMap(book -> book.getContacts().stream())
+                .sorted(Comparator.comparing(Contact::getState))
+                .forEach(System.out::println);
+    }
+
+    // UC12 — Sort all contacts by Zip
+    public void sortByZip() {
+        System.out.println("\n--- Contacts Sorted by Zip ---");
+        addressBookMap.values().stream()
+                .flatMap(book -> book.getContacts().stream())
+                .sorted(Comparator.comparing(Contact::getZip))
+                .forEach(System.out::println);
+    }
 
     public Map<String, AddressBook> getAddressBookMap() {
         return addressBookMap;
