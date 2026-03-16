@@ -73,5 +73,58 @@ public class HotelService {
         }
         return bestRated;
     }
+
+    public String[] parseInput(String input) {
+        // Validate and split input: "Rewards: 11Sep2020(Fri), 12Sep2020(Sat)"
+        if (input == null || input.isEmpty()) {
+            throw new HotelReservationException(
+                    HotelReservationException.ExceptionType.INVALID_DATE_FORMAT,
+                    "Input cannot be null or empty");
+        }
+
+        String[] parts = input.split(":");
+        String customerType = parts[0].trim();
+
+        if (!customerType.equalsIgnoreCase("Regular")
+                && !customerType.equalsIgnoreCase("Rewards")) {
+            throw new HotelReservationException(
+                    HotelReservationException.ExceptionType.INVALID_CUSTOMER_TYPE,
+                    "Invalid customer type: " + customerType);
+        }
+
+        String[] dates = parts[1].trim().split(",");
+        for (String date : dates) {
+            if (!date.trim().matches("[0-9]{2}[A-Za-z]{3}[0-9]{4}\\([A-Za-z]{3}\\)")) {
+                throw new HotelReservationException(
+                        HotelReservationException.ExceptionType.INVALID_DATE_FORMAT,
+                        "Invalid date format: " + date.trim());
+            }
+        }
+        return dates;
+    }
+
+    public Hotel findCheapestBestRatedHotelForRewards(int weekdays, int weekends) {
+        Hotel bestHotel = null;
+        int lowestTotal = Integer.MAX_VALUE;
+
+        for (Hotel hotel : hotels) {
+            int totalRate = calculateRewardsTotalRate(hotel, weekdays, weekends);
+
+            if (totalRate < lowestTotal) {
+                lowestTotal = totalRate;
+                bestHotel = hotel;
+            } else if (totalRate == lowestTotal) {
+                if (hotel.getRating() > bestHotel.getRating()) {
+                    bestHotel = hotel;
+                }
+            }
+        }
+        return bestHotel;
+    }
+
+    public int calculateRewardsTotalRate(Hotel hotel, int weekdays, int weekends) {
+        return (hotel.getRewardsWeekdayRate() * weekdays)
+                + (hotel.getRewardsWeekendRate() * weekends);
+    }
 }
 

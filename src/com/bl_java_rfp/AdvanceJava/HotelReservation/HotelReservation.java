@@ -15,30 +15,25 @@ public class HotelReservation {
         List<Hotel> hotelList = Arrays.asList(lakewood, bridgewood, ridgewood);
         HotelService hotelService = new HotelService(hotelList);
 
-        // I/P: 11Sep2020(Fri), 12Sep2020(Sat)
-        String[] dates = {"11Sep2020(Fri)", "12Sep2020(Sat)"};
+        try {
+            // I/P: Rewards: 11Sep2020(Fri), 12Sep2020(Sat)
+            String input = "Rewards: 11Sep2020(Fri), 12Sep2020(Sat)";
+            String[] dates = hotelService.parseInput(input);
 
-        int weekdays = hotelService.countWeekdays(dates);
-        int weekends = hotelService.countWeekends(dates);
+            int weekdays = hotelService.countWeekdays(dates);
+            int weekends = hotelService.countWeekends(dates);
 
-        // UC6 — Cheapest Best Rated Regular
-        Hotel cheapestBestRated = hotelService.findCheapestBestRatedHotel(weekdays, weekends);
-        int cheapestTotal = hotelService.calculateTotalRate(cheapestBestRated, weekdays, weekends);
-        System.out.println("Cheapest Best Rated Hotel: " + cheapestBestRated.getName()
-                + " | Rating: " + cheapestBestRated.getRating()
-                + " | Total Rates: $" + cheapestTotal);
+            Hotel cheapestBestRated = hotelService
+                    .findCheapestBestRatedHotelForRewards(weekdays, weekends);
+            int totalRate = hotelService
+                    .calculateRewardsTotalRate(cheapestBestRated, weekdays, weekends);
 
-        // UC7 — Best Rated
-        Hotel bestRated = hotelService.findBestRatedHotel();
-        int bestRatedTotal = hotelService.calculateTotalRate(bestRated, weekdays, weekends);
-        System.out.println("Best Rated Hotel: " + bestRated.getName()
-                + " | Rating: " + bestRated.getRating()
-                + " | Total Rates: $" + bestRatedTotal);
+            System.out.println("Cheapest Best Rated Hotel: " + cheapestBestRated.getName()
+                    + " | Rating: " + cheapestBestRated.getRating()
+                    + " | Total Rates: $" + totalRate);
 
-        // UC9 — Print all hotels with rewards rates
-        System.out.println("\n--- Hotels with Rewards Rates ---");
-        for (Hotel hotel : hotelList) {
-            System.out.println(hotel);
+        } catch (HotelReservationException e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }
