@@ -1,81 +1,25 @@
 package com.bl_java_rfp.AdvanceJava.HotelReservation;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 public class HotelService {
 
     private List<Hotel> hotels;
+    private static final String DATE_REGEX = "[0-9]{2}[A-Za-z]{3}[0-9]{4}\\([A-Za-z]{3}\\)";
+    private static final DateTimeFormatter DATE_FORMATTER =
+            DateTimeFormatter.ofPattern("ddMMMuuuu", Locale.ENGLISH);
 
     public HotelService(List<Hotel> hotels) {
         this.hotels = hotels;
     }
 
-    public int countWeekdays(String[] dates) {
-        int count = 0;
-        for (String date : dates) {
-            String day = extractDay(date).toLowerCase();
-            if (!day.equals("sat") && !day.equals("sun")) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    public int countWeekends(String[] dates) {
-        int count = 0;
-        for (String date : dates) {
-            String day = extractDay(date).toLowerCase();
-            if (day.equals("sat") || day.equals("sun")) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    private String extractDay(String date) {
-        return date.substring(date.indexOf("(") + 1, date.indexOf(")"));
-    }
-
-    public Hotel findCheapestBestRatedHotel(int weekdays, int weekends) {
-        Hotel bestHotel = null;
-        int lowestTotal = Integer.MAX_VALUE;
-
-        for (Hotel hotel : hotels) {
-            int totalRate = calculateTotalRate(hotel, weekdays, weekends);
-
-            if (totalRate < lowestTotal) {
-                lowestTotal = totalRate;
-                bestHotel = hotel;
-            } else if (totalRate == lowestTotal) {
-                // Tie-breaker: pick hotel with higher rating
-                if (hotel.getRating() > bestHotel.getRating()) {
-                    bestHotel = hotel;
-                }
-            }
-        }
-        return bestHotel;
-    }
-
-    public int calculateTotalRate(Hotel hotel, int weekdays, int weekends) {
-        return (hotel.getRegularWeekdayRate() * weekdays)
-                + (hotel.getRegularWeekendRate() * weekends);
-    }
-
-    public Hotel findBestRatedHotel() {
-        Hotel bestRated = null;
-        int highestRating = Integer.MIN_VALUE;
-
-        for (Hotel hotel : hotels) {
-            if (hotel.getRating() > highestRating) {
-                highestRating = hotel.getRating();
-                bestRated = hotel;
-            }
-        }
-        return bestRated;
-    }
-
+    // Parse and validate full input string
     public String[] parseInput(String input) {
-        // Validate and split input: "Rewards: 11Sep2020(Fri), 12Sep2020(Sat)"
         if (input == null || input.isEmpty()) {
             throw new HotelReservationException(
                     HotelReservationException.ExceptionType.INVALID_DATE_FORMAT,
@@ -93,38 +37,67 @@ public class HotelService {
         }
 
         String[] dates = parts[1].trim().split(",");
-        for (String date : dates) {
-            if (!date.trim().matches("[0-9]{2}[A-Za-z]{3}[0-9]{4}\\([A-Za-z]{3}\\)")) {
-                throw new HotelReservationException(
-                        HotelReservationException.ExceptionType.INVALID_DATE_FORMAT,
-                        "Invalid date format: " + date.trim());
-            }
-        }
+        Arrays.stream(dates)
+                .map(String::trim)
+                .filter(date -> !date.matches(DATE_REGEX))
+                .findAny()
+                .ifPresent(invalid -> {
+                    throw new HotelReservationException(
+                            HotelReservationException.ExceptionType.INVALID_DATE_FORMAT,
+                            "Invalid date format: " + invalid);
+                });
+
         return dates;
     }
 
-    public Hotel findCheapestBestRatedHotelForRewards(int weekdays, int weekends) {
-        Hotel bestHotel = null;
-        int lowestTotal = Integer.MAX_VALUE;
-
-        for (Hotel hotel : hotels) {
-            int totalRate = calculateRewardsTotalRate(hotel, weekdays, weekends);
-
-            if (totalRate < lowestTotal) {
-                lowestTotal = totalRate;
-                bestHotel = hotel;
-            } else if (totalRate == lowestTotal) {
-                if (hotel.getRating() > bestHotel.getRating()) {
-                    bestHotel = hotel;
-                }
-            }
-        }
-        return bestHotel;
+    // Extract date string without day abbreviation: 11Sep2020(Fri) -> 11Sep2020
+    private String extractDatePart(String date) {
+        return date.trim().substring(0, date.indexOf("(")).trim();
     }
 
-    public int calculateRewardsTotalRate(Hotel hotel, int weekdays, int weekends) {
-        return (hotel.getRewardsWeekdayRate() * weekdays)
-                + (hotel.getRewardsWeekendRate() * weekends);
+    // Use Java 8 LocalDate to determine if date is weekend
+    private boolean isWeekend(String date) {
+        LocalDate localDate = LocalDate.parse(extractDatePart(date), DATE_FORMATTER);
+        return localDate.getDayOfWeek().getValue() == 6
+                || localDate.getDayOfWeek().getValue() == 7;
+    }
+
+    public long countWeekdays(String[] dates) {
+        return Arrays.stream(dates)
+                .filter(date -> !isWeekend(date))
+                .count();
+    }
+
+    public long countWeekends(String[] dates) {
+        return Arrays.stream(dates)
+                .filter(this::isWeekend)
+                .count();
+    }
+
+    // Stream-based cheapest best-rated for rewards customer
+    public Hotel findCheapestBestRatedHotelForRewards(long weekdays, long weekends) {
+        return hotels.stream()
+                .sorted(Comparator
+                        .comparingInt((Hotel h) ->
+                                calculateRewardsTotalRate(h, weekdays, weekends))
+                        .thenComparingInt(h -> -h.getRating()))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public int calculateRewardsTotalRate(Hotel hotel, long weekdays, long weekends) {
+        return (int) ((hotel.getRewardsWeekdayRate() * weekdays)
+                + (hotel.getRewardsWeekendRate() * weekends));
+    }
+
+    public int calculateTotalRate(Hotel hotel, long weekdays, long weekends) {
+        return (int) ((hotel.getRegularWeekdayRate() * weekdays)
+                + (hotel.getRegularWeekendRate() * weekends));
+    }
+
+    public Hotel findBestRatedHotel() {
+        return hotels.stream()
+                .max(Comparator.comparingInt(Hotel::getRating))
+                .orElse(null);
     }
 }
-

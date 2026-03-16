@@ -20,8 +20,8 @@ public class HotelReservation {
             String input = "Rewards: 11Sep2020(Fri), 12Sep2020(Sat)";
             String[] dates = hotelService.parseInput(input);
 
-            int weekdays = hotelService.countWeekdays(dates);
-            int weekends = hotelService.countWeekends(dates);
+            long weekdays = hotelService.countWeekdays(dates);
+            long weekends = hotelService.countWeekends(dates);
 
             Hotel cheapestBestRated = hotelService
                     .findCheapestBestRatedHotelForRewards(weekdays, weekends);
