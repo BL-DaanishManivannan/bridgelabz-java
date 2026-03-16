@@ -1,6 +1,5 @@
 package com.bl_java_rfp.AdvanceJava.HotelReservation;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class HotelService {
@@ -11,12 +10,12 @@ public class HotelService {
         this.hotels = hotels;
     }
 
-    public Hotel findCheapestHotel(int numberOfDays) {
+    public Hotel findCheapestHotel(int weekdays, int weekends) {
         Hotel cheapestHotel = null;
         int lowestTotal = Integer.MAX_VALUE;
 
         for (Hotel hotel : hotels) {
-            int totalRate = hotel.getRegularWeekdayRate() * numberOfDays;
+            int totalRate = calculateTotalRate(hotel, weekdays, weekends);
             if (totalRate < lowestTotal) {
                 lowestTotal = totalRate;
                 cheapestHotel = hotel;
@@ -25,7 +24,8 @@ public class HotelService {
         return cheapestHotel;
     }
 
-    public int calculateTotalRate(Hotel hotel, int numberOfDays) {
-        return hotel.getRegularWeekdayRate() * numberOfDays;
+    public int calculateTotalRate(Hotel hotel, int weekdays, int weekends) {
+        return (hotel.getRegularWeekdayRate() * weekdays)
+                + (hotel.getRegularWeekendRate() * weekends);
     }
 }
