@@ -60,4 +60,18 @@ public class HotelService {
         return (hotel.getRegularWeekdayRate() * weekdays)
                 + (hotel.getRegularWeekendRate() * weekends);
     }
+
+    public Hotel findBestRatedHotel() {
+        Hotel bestRated = null;
+        int highestRating = Integer.MIN_VALUE;
+
+        for (Hotel hotel : hotels) {
+            if (hotel.getRating() > highestRating) {
+                highestRating = hotel.getRating();
+                bestRated = hotel;
+            }
+        }
+        return bestRated;
+    }
 }
+
