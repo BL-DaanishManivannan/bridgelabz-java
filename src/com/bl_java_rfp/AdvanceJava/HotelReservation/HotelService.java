@@ -32,23 +32,28 @@ public class HotelService {
         return count;
     }
 
-    // Extracts day abbreviation from format: 11Sep2020(Fri)
     private String extractDay(String date) {
         return date.substring(date.indexOf("(") + 1, date.indexOf(")"));
     }
 
-    public Hotel findCheapestHotel(int weekdays, int weekends) {
-        Hotel cheapestHotel = null;
+    public Hotel findCheapestBestRatedHotel(int weekdays, int weekends) {
+        Hotel bestHotel = null;
         int lowestTotal = Integer.MAX_VALUE;
 
         for (Hotel hotel : hotels) {
             int totalRate = calculateTotalRate(hotel, weekdays, weekends);
+
             if (totalRate < lowestTotal) {
                 lowestTotal = totalRate;
-                cheapestHotel = hotel;
+                bestHotel = hotel;
+            } else if (totalRate == lowestTotal) {
+                // Tie-breaker: pick hotel with higher rating
+                if (hotel.getRating() > bestHotel.getRating()) {
+                    bestHotel = hotel;
+                }
             }
         }
-        return cheapestHotel;
+        return bestHotel;
     }
 
     public int calculateTotalRate(Hotel hotel, int weekdays, int weekends) {

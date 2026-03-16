@@ -21,11 +21,11 @@ public class HotelReservation {
         int weekdays = hotelService.countWeekdays(dates);
         int weekends = hotelService.countWeekends(dates);
 
-        Hotel cheapest = hotelService.findCheapestHotel(weekdays, weekends);
-        int totalRate  = hotelService.calculateTotalRate(cheapest, weekdays, weekends);
+        Hotel cheapestBestRated = hotelService.findCheapestBestRatedHotel(weekdays, weekends);
+        int totalRate = hotelService.calculateTotalRate(cheapestBestRated, weekdays, weekends);
 
-        System.out.println("Cheapest Hotel: " + cheapest.getName()
-                + " | Rating: " + cheapest.getRating()
+        System.out.println("Cheapest Best Rated Hotel: " + cheapestBestRated.getName()
+                + " | Rating: " + cheapestBestRated.getRating()
                 + " | Total Rates: $" + totalRate);
     }
 }
