@@ -2,8 +2,8 @@ package com.bl_java_rfp.FileIO.AddressBook;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-// Manages a single Address Book with CRUD operations
 public class AddressBook {
 
     private List<Contact> contacts;
@@ -12,14 +12,21 @@ public class AddressBook {
         this.contacts = new ArrayList<>();
     }
 
-    // UC2 — Add Contact
+    // UC2 — Add Contact with UC7 duplicate check
     public void addContact(Contact contact) {
-        contacts.add(contact);
-        System.out.println("Contact added: " + contact.getFirstName()
-                + " " + contact.getLastName());
+        boolean isDuplicate = contacts.stream()
+                .anyMatch(c -> c.equals(contact));
+        if (isDuplicate) {
+            System.out.println("Duplicate contact ignored: "
+                    + contact.getFirstName() + " " + contact.getLastName());
+        } else {
+            contacts.add(contact);
+            System.out.println("Contact added: "
+                    + contact.getFirstName() + " " + contact.getLastName());
+        }
     }
 
-    // UC3 — Edit Contact by First Name
+    // UC3 — Edit Contact
     public void editContact(String firstName, Contact updatedContact) {
         for (Contact contact : contacts) {
             if (contact.getFirstName().equalsIgnoreCase(firstName)) {
@@ -38,15 +45,29 @@ public class AddressBook {
         System.out.println("Contact not found: " + firstName);
     }
 
-    // UC4 — Delete Contact by First Name
+    // UC4 — Delete Contact
     public void deleteContact(String firstName) {
-        boolean removed = contacts.removeIf(contact ->
-                contact.getFirstName().equalsIgnoreCase(firstName));
+        boolean removed = contacts.removeIf(c ->
+                c.getFirstName().equalsIgnoreCase(firstName));
         if (removed) {
             System.out.println("Contact deleted: " + firstName);
         } else {
             System.out.println("Contact not found: " + firstName);
         }
+    }
+
+    // UC8 — Search by City
+    public List<Contact> searchByCity(String city) {
+        return contacts.stream()
+                .filter(c -> c.getCity().equalsIgnoreCase(city))
+                .collect(Collectors.toList());
+    }
+
+    // UC8 — Search by State
+    public List<Contact> searchByState(String state) {
+        return contacts.stream()
+                .filter(c -> c.getState().equalsIgnoreCase(state))
+                .collect(Collectors.toList());
     }
 
     public List<Contact> getContacts() {

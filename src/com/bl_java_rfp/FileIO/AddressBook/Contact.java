@@ -52,4 +52,19 @@ public class Contact {
                 + " | Phone: " + phoneNumber
                 + " | Email: " + email;
     }
+
+    // UC7 — Override equals and hashCode for duplicate check by first and last name
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Contact contact = (Contact) obj;
+        return firstName.equalsIgnoreCase(contact.firstName)
+                && lastName.equalsIgnoreCase(contact.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return (firstName + lastName).toLowerCase().hashCode();
+    }
 }
