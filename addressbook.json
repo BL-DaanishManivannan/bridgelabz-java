@@ -1,0 +1,32 @@
+[
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "address": "123 Main St",
+    "city": "Miami",
+    "state": "Florida",
+    "zip": "33101",
+    "phoneNumber": "9876543210",
+    "email": "john@email.com"
+  },
+  {
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "address": "456 Oak Ave",
+    "city": "Orlando",
+    "state": "Florida",
+    "zip": "32801",
+    "phoneNumber": "9123456789",
+    "email": "jane@email.com"
+  },
+  {
+    "firstName": "Alice",
+    "lastName": "Brown",
+    "address": "789 Corp Blvd",
+    "city": "Miami",
+    "state": "Florida",
+    "zip": "33102",
+    "phoneNumber": "9000000001",
+    "email": "alice@work.com"
+  }
+]
