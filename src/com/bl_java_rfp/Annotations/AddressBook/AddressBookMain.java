@@ -1,4 +1,4 @@
-package com.bl_java_rfp.Annotations;
+package com.bl_java_rfp.Annotations.AddressBook;
 
 import java.util.List;
 
