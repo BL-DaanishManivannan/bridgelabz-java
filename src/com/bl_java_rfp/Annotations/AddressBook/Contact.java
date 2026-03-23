@@ -1,15 +1,35 @@
 package com.bl_java_rfp.Annotations.AddressBook;
 
+import com.opencsv.bean.CsvBindByName;
+
 public class Contact {
 
+    @CsvBindByName(column = "firstName")
     private String firstName;
+
+    @CsvBindByName(column = "lastName")
     private String lastName;
+
+    @CsvBindByName(column = "address")
     private String address;
+
+    @CsvBindByName(column = "city")
     private String city;
+
+    @CsvBindByName(column = "state")
     private String state;
+
+    @CsvBindByName(column = "zip")
     private String zip;
+
+    @CsvBindByName(column = "phoneNumber")
     private String phoneNumber;
+
+    @CsvBindByName(column = "email")
     private String email;
+
+    // OpenCSV requires a no-arg constructor
+    public Contact() {}
 
     public Contact(String firstName, String lastName, String address,
                    String city, String state, String zip,
@@ -43,18 +63,6 @@ public class Contact {
     public void setEmail(String email)             { this.email = email; }
 
     @Override
-    public String toString() {
-        return "Contact: " + firstName + " " + lastName
-                + " | Address: " + address
-                + " | City: " + city
-                + " | State: " + state
-                + " | Zip: " + zip
-                + " | Phone: " + phoneNumber
-                + " | Email: " + email;
-    }
-
-    // UC7 — Override equals and hashCode for duplicate check by first and last name
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
@@ -66,5 +74,16 @@ public class Contact {
     @Override
     public int hashCode() {
         return (firstName + lastName).toLowerCase().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Contact: " + firstName + " " + lastName
+                + " | Address: " + address
+                + " | City: " + city
+                + " | State: " + state
+                + " | Zip: " + zip
+                + " | Phone: " + phoneNumber
+                + " | Email: " + email;
     }
 }

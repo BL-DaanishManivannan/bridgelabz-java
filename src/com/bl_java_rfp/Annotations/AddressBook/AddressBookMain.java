@@ -21,17 +21,17 @@ public class AddressBookMain {
                 "789 Corp Blvd", "Miami", "Florida",
                 "33102", "9000000001", "alice@work.com"));
 
-        System.out.println("\n--- Contacts Before Write ---");
+        System.out.println("\n--- Contacts Before CSV Write ---");
         friendsBook.displayAllContacts();
 
-        // UC13 — Write to file
-        FileIOService fileIOService = new FileIOService();
-        fileIOService.writeToFile(friendsBook);
+        // UC14 — Write to CSV
+        CSVFileIOService csvService = new CSVFileIOService();
+        csvService.writeToCSV(friendsBook.getContacts());
 
-        // UC13 — Read from file
-        List<Contact> contactsFromFile = fileIOService.readFromFile();
+        // UC14 — Read from CSV
+        List<Contact> contactsFromCSV = csvService.readFromCSV();
 
-        System.out.println("\n--- Contacts Read From File ---");
-        contactsFromFile.forEach(System.out::println);
+        System.out.println("\n--- Contacts Read From CSV ---");
+        contactsFromCSV.forEach(System.out::println);
     }
 }
