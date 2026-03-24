@@ -38,4 +38,11 @@ public class StateCensusAnalyser {
                 .sorted(Comparator.comparing(StateCensus::getDensityPerSqKm))
                 .collect(Collectors.toList());
     }
+
+    // UC12 → Sort by Area
+    public List<StateCensus> sortByArea(List<StateCensus> data) {
+        return data.stream()
+                .sorted(Comparator.comparing(StateCensus::getAreaInSqKm))
+                .collect(Collectors.toList());
+    }
 }
