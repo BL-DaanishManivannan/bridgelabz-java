@@ -4,6 +4,8 @@ import com.bl_java_rfp.ApplyDesignPrinciples.censusanalyser.indianstatecensus.ex
 import com.bl_java_rfp.ApplyDesignPrinciples.censusanalyser.indianstatecensus.model.StateCensus;
 
 import java.util.List;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 public class StateCensusAnalyser {
 
@@ -14,5 +16,13 @@ public class StateCensusAnalyser {
 
     public int getRecordCount(List<StateCensus> data) {
         return data.size();
+    }
+
+    // UC9 → Sort by State Name
+    public List<StateCensus> sortByStateName(List<StateCensus> data) {
+
+        return data.stream()
+                .sorted(Comparator.comparing(StateCensus::getState))
+                .collect(Collectors.toList());
     }
 }
