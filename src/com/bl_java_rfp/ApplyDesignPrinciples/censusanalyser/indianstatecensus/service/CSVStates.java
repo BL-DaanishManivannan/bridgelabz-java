@@ -10,10 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CSVStates {
-
     public int loadCSVData(String filePath) throws CensusAnalyserException {
 
-        // UC4 → File type validation
         if (!filePath.endsWith(".csv")) {
             throw new CensusAnalyserException("Invalid file type. Only CSV allowed");
         }
@@ -23,12 +21,13 @@ public class CSVStates {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
 
-            Iterator<String> iterator = reader.lines().iterator();
-
-            // Skip header
-            if (iterator.hasNext()) {
-                iterator.next();
+            // UC5 → Delimiter validation
+            String header = reader.readLine();
+            if (header == null || !header.contains(",")) {
+                throw new CensusAnalyserException("Invalid delimiter in CSV file");
             }
+
+            Iterator<String> iterator = reader.lines().iterator();
 
             while (iterator.hasNext()) {
                 records.add(iterator.next());

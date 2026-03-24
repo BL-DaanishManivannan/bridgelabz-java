@@ -23,6 +23,12 @@ public class CSVStateCensus {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
 
+            // UC5 → Delimiter check (NEW)
+            String header = reader.readLine();
+            if (header == null || !header.contains(",")) {
+                throw new CensusAnalyserException("Invalid delimiter in CSV file");
+            }
+
             Iterator<String> iterator = reader.lines().iterator();
 
             // Skip header
