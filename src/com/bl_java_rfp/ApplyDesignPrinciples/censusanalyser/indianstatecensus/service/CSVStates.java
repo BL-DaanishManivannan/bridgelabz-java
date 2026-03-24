@@ -1,5 +1,7 @@
 package com.bl_java_rfp.ApplyDesignPrinciples.censusanalyser.indianstatecensus.service;
 
+import com.bl_java_rfp.ApplyDesignPrinciples.censusanalyser.indianstatecensus.exception.CensusAnalyserException;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,7 +11,7 @@ import java.util.List;
 
 public class CSVStates {
 
-    public int loadCSVData(String filePath) {
+    public int loadCSVData(String filePath) throws CensusAnalyserException {
         List<String> records = new ArrayList<>();
 
         try {
@@ -17,7 +19,6 @@ public class CSVStates {
 
             Iterator<String> iterator = reader.lines().iterator();
 
-            // Skip header
             if (iterator.hasNext()) {
                 iterator.next();
             }
@@ -29,7 +30,7 @@ public class CSVStates {
             reader.close();
 
         } catch (IOException e) {
-            e.printStackTrace(); // Will handle properly in later UC
+            throw new CensusAnalyserException("Incorrect file path or file not found");
         }
 
         return records.size();
