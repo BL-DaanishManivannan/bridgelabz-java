@@ -31,4 +31,11 @@ public class StateCensusAnalyser {
                 .sorted(Comparator.comparing(StateCensus::getPopulation))
                 .collect(Collectors.toList());
     }
+
+    // UC11 → Sort by Density
+    public List<StateCensus> sortByDensity(List<StateCensus> data) {
+        return data.stream()
+                .sorted(Comparator.comparing(StateCensus::getDensityPerSqKm))
+                .collect(Collectors.toList());
+    }
 }
