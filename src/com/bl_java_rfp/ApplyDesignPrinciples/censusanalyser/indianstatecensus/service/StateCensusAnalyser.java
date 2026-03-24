@@ -20,9 +20,15 @@ public class StateCensusAnalyser {
 
     // UC9 → Sort by State Name
     public List<StateCensus> sortByStateName(List<StateCensus> data) {
-
         return data.stream()
                 .sorted(Comparator.comparing(StateCensus::getState))
+                .collect(Collectors.toList());
+    }
+
+    // UC10 → Sort by Population
+    public List<StateCensus> sortByPopulation(List<StateCensus> data) {
+        return data.stream()
+                .sorted(Comparator.comparing(StateCensus::getPopulation))
                 .collect(Collectors.toList());
     }
 }
