@@ -12,6 +12,12 @@ import java.util.List;
 public class CSVStateCensus {
 
     public int loadCSVData(String filePath) throws CensusAnalyserException {
+
+        // UC4 → File type validation
+        if (!filePath.endsWith(".csv")) {
+            throw new CensusAnalyserException("Invalid file type. Only CSV allowed");
+        }
+
         List<String> records = new ArrayList<>();
 
         try {
@@ -19,6 +25,7 @@ public class CSVStateCensus {
 
             Iterator<String> iterator = reader.lines().iterator();
 
+            // Skip header
             if (iterator.hasNext()) {
                 iterator.next();
             }
