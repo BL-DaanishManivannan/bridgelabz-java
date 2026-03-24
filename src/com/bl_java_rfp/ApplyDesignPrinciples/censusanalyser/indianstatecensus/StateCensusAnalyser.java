@@ -6,4 +6,10 @@ public class StateCensusAnalyser {
         CSVStateCensus csvStateCensus = new CSVStateCensus();
         return csvStateCensus.loadCSVData(csvFilePath);
     }
+
+    // UC2 Addition
+    public int loadStateCodeData(String csvFilePath) {
+        CSVStates csvStates = new CSVStates();
+        return csvStates.loadCSVData(csvFilePath);
+    }
 }
