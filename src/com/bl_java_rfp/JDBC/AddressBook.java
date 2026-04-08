@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class AddressBook {
 
@@ -35,8 +37,6 @@ public class AddressBook {
         persons.removeIf(person -> person.getFirstName().equals(firstName));
     }
 
-    import java.util.Comparator;
-
     public void sortByName() {
         persons.sort(Comparator.comparing(Person::getFirstName));
     }
@@ -45,8 +45,6 @@ public class AddressBook {
     public List<Person> getPersons() {
         return persons;
     }
-    import java.util.Comparator;
-
     // Sort by City
     public void sortByCity() {
         persons.sort(Comparator.comparing(Person::getCity));
@@ -60,5 +58,16 @@ public class AddressBook {
     // Sort by Zip
     public void sortByZip() {
         persons.sort(Comparator.comparing(Person::getZip));
+    }
+    // Group by City
+    public Map<String, List<Person>> getPersonsByCity() {
+        return persons.stream()
+                .collect(Collectors.groupingBy(Person::getCity));
+    }
+
+    // Group by State
+    public Map<String, List<Person>> getPersonsByState() {
+        return persons.stream()
+                .collect(Collectors.groupingBy(Person::getState));
     }
 }
