@@ -34,4 +34,15 @@ public class AddressBook {
     public void deletePerson(String firstName) {
         persons.removeIf(person -> person.getFirstName().equals(firstName));
     }
+
+    import java.util.Comparator;
+
+    public void sortByName() {
+        persons.sort(Comparator.comparing(Person::getFirstName));
+    }
+
+    // Needed for test (minimal exposure)
+    public List<Person> getPersons() {
+        return persons;
+    }
 }

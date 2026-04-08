@@ -35,6 +35,10 @@ public class Person {
         return firstName.equals(person.firstName) &&
                 lastName.equals(person.lastName);
     }
+    @Override
+    public String toString() {
+        return firstName + " " + lastName + " - " + city;
+    }
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
     public String getCity() { return city; }
