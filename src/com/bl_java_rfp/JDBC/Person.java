@@ -1,12 +1,8 @@
+import java.util.Objects;
+
 public class Person {
 
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String city;
-    private String state;
-    private String zip;
-    private String phoneNumber;
+    private String firstName, lastName, address, city, state, zip, phoneNumber;
 
     public Person(String firstName, String lastName,
                   String address, String city,
@@ -21,27 +17,31 @@ public class Person {
         this.zip = zip;
         this.phoneNumber = phoneNumber;
     }
+
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
+    public String getCity() { return city; }
+    public String getState() { return state; }
+    public String getZip() { return zip; }
     public String getAddress() { return address; }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+    public void setAddress(String address) { this.address = address; }
 
-        Person person = (Person) obj;
-        return firstName.equals(person.firstName) &&
-                lastName.equals(person.lastName);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        Person p = (Person) o;
+        return firstName.equals(p.firstName) && lastName.equals(p.lastName);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName);
+    }
+
     @Override
     public String toString() {
         return firstName + " " + lastName + " - " + city;
     }
-    public String getState() { return state; }
-    public String getZip() { return zip; }
-    public String getFirstName() { return firstName; }
-    public String getLastName() { return lastName; }
-    public String getCity() { return city; }
 }

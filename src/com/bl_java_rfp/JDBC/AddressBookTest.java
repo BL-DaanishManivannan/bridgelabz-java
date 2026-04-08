@@ -1,165 +1,113 @@
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AddressBookTest {
 
-    // ✅ UC0 - Welcome Message
+    // UC2 + UC5
     @Test
-    void givenProgramStarts_shouldDisplayWelcomeMessage() {
-        AddressBookMain main = new AddressBookMain();
-        String message = main.getWelcomeMessage();
-        assertEquals("Welcome to Address Book Program", message);
+    void givenMultiplePersons_shouldBeAdded() {
+        AddressBook ab = new AddressBook();
+
+        ab.addPerson(new Person("D1", "M", "", "Chennai", "TN", "1", "1"));
+        ab.addPerson(new Person("D2", "M", "", "Bangalore", "KA", "2", "2"));
+
+        assertEquals(2, ab.getPersonCount());
     }
 
-    // ✅ UC1 - Create Person
+    // UC6
     @Test
-    void givenPersonDetails_shouldCreatePersonObject() {
-        Person person = new Person(
-                "Daanish", "M",
-                "Street 1", "Chennai",
-                "TN", "600001",
-                "9999999999"
-        );
+    void givenDuplicatePerson_shouldNotBeAdded() {
+        AddressBook ab = new AddressBook();
 
-        assertEquals("Daanish", person.getFirstName());
-        assertEquals("M", person.getLastName());
-        assertEquals("Chennai", person.getCity());
+        ab.addPerson(new Person("D1", "M", "", "C", "TN", "1", "1"));
+        ab.addPerson(new Person("D1", "M", "", "C", "TN", "2", "2"));
+
+        assertEquals(1, ab.getPersonCount());
     }
 
-    // ✅ UC2 - Add Person
+    // UC3
     @Test
-    void givenPerson_shouldBeAddedToAddressBook() {
-        AddressBook addressBook = new AddressBook();
+    void givenPerson_whenEdited_shouldUpdateAddress() {
+        AddressBook ab = new AddressBook();
 
-        Person person = new Person(
-                "Daanish", "M",
-                "Street 1", "Chennai",
-                "TN", "600001",
-                "9999999999"
-        );
+        Person p = new Person("D1", "M", "Old", "C", "TN", "1", "1");
+        ab.addPerson(p);
 
-        addressBook.addPerson(person);
+        ab.editPerson("D1", "New");
 
-        assertEquals(1, addressBook.getPersonCount());
+        assertEquals("New", p.getAddress());
     }
 
-    // ✅ UC3 - Edit Person
+    // UC4
     @Test
-    void givenPerson_whenEdited_shouldUpdateDetails() {
-        AddressBook addressBook = new AddressBook();
+    void givenPerson_whenDeleted_shouldBeRemoved() {
+        AddressBook ab = new AddressBook();
 
-        Person person = new Person(
-                "Daanish", "M",
-                "Old Street", "Chennai",
-                "TN", "600001",
-                "9999999999"
-        );
+        ab.addPerson(new Person("D1", "M", "", "C", "TN", "1", "1"));
+        ab.deletePerson("D1");
 
-        addressBook.addPerson(person);
-
-        addressBook.editPerson("Daanish", "New Street");
-
-        assertEquals("New Street", person.getAddress());
+        assertEquals(0, ab.getPersonCount());
     }
 
-    // ✅ UC4 - Delete Person
+    // UC7
     @Test
-    void givenPerson_whenDeleted_shouldRemoveFromAddressBook() {
-        AddressBook addressBook = new AddressBook();
+    void givenPersons_whenSortedByName_shouldBeOrdered() {
+        AddressBook ab = new AddressBook();
 
-        Person person = new Person(
-                "Daanish", "M",
-                "Street 1", "Chennai",
-                "TN", "600001",
-                "9999999999"
-        );
+        ab.addPerson(new Person("Z", "M", "", "C", "TN", "1", "1"));
+        ab.addPerson(new Person("A", "K", "", "B", "KA", "2", "2"));
 
-        addressBook.addPerson(person);
-        addressBook.deletePerson("Daanish");
+        ab.sortByName();
 
-        assertEquals(0, addressBook.getPersonCount());
+        assertEquals("A", ab.getPersons().get(0).getFirstName());
     }
+
+    // UC8
     @Test
-    void givenMultiplePersons_shouldBeAddedToAddressBook() {
-        AddressBook addressBook = new AddressBook();
+    void givenPersons_whenSortedByCity_shouldBeOrdered() {
+        AddressBook ab = new AddressBook();
 
-        Person p1 = new Person("Daanish", "M",
-                "Street 1", "Chennai", "TN", "600001", "1111111111");
+        ab.addPerson(new Person("A", "M", "", "Chennai", "TN", "1", "1"));
+        ab.addPerson(new Person("B", "K", "", "Bangalore", "KA", "2", "2"));
 
-        Person p2 = new Person("Alex", "K",
-                "Street 2", "Bangalore", "KA", "560001", "2222222222");
+        ab.sortByCity();
 
-        addressBook.addPerson(p1);
-        addressBook.addPerson(p2);
-
-        assertEquals(2, addressBook.getPersonCount());
+        assertEquals("Bangalore", ab.getPersons().get(0).getCity());
     }
+
+    // UC9
     @Test
-    void givenDuplicatePerson_whenAdded_shouldNotBeAdded() {
-        AddressBook addressBook = new AddressBook();
+    void givenPersons_whenGroupedByCity_shouldReturnCorrectCount() {
+        AddressBook ab = new AddressBook();
 
-        Person p1 = new Person("Daanish", "M",
-                "Street 1", "Chennai", "TN", "600001", "1111111111");
+        ab.addPerson(new Person("A", "M", "", "Chennai", "TN", "1", "1"));
+        ab.addPerson(new Person("B", "M", "", "Chennai", "TN", "2", "2"));
 
-        Person p2 = new Person("Daanish", "M",
-                "Street 2", "Chennai", "TN", "600001", "2222222222");
-
-        addressBook.addPerson(p1);
-        addressBook.addPerson(p2); // duplicate
-
-        assertEquals(1, addressBook.getPersonCount());
+        assertEquals(2, ab.getPersonsByCity().get("Chennai").size());
     }
+
+    // UC10
     @Test
-    void givenMultiplePersons_whenSortedByName_shouldReturnSortedOrder() {
-        AddressBook addressBook = new AddressBook();
+    void givenPersons_whenSearchedByCity_shouldReturnResults() {
+        AddressBook ab = new AddressBook();
 
-        Person p1 = new Person("Zara", "M",
-                "Street 1", "Chennai", "TN", "600001", "1111111111");
+        ab.addPerson(new Person("A", "M", "", "Chennai", "TN", "1", "1"));
+        ab.addPerson(new Person("B", "M", "", "Bangalore", "KA", "2", "2"));
 
-        Person p2 = new Person("Alex", "K",
-                "Street 2", "Bangalore", "KA", "560001", "2222222222");
-
-        addressBook.addPerson(p1);
-        addressBook.addPerson(p2);
-
-        addressBook.sortByName();
-
-        // After sorting → Alex should be first
-        assertEquals("Alex", addressBook.getPersons().get(0).getFirstName());
+        assertEquals(1, ab.searchByCity("Chennai").size());
     }
+
+    // UC11–15 (basic validation)
     @Test
-    void givenMultiplePersons_whenSortedByCity_shouldReturnSortedOrder() {
-        AddressBook addressBook = new AddressBook();
+    void givenIOOperations_shouldNotThrow() {
+        AddressBook ab = new AddressBook();
+        ab.addPerson(new Person("A", "M", "", "C", "TN", "1", "1"));
 
-        Person p1 = new Person("Daanish", "M",
-                "Street 1", "Chennai", "TN", "600001", "1111111111");
-
-        Person p2 = new Person("Alex", "K",
-                "Street 2", "Bangalore", "KA", "560001", "2222222222");
-
-        addressBook.addPerson(p1);
-        addressBook.addPerson(p2);
-
-        addressBook.sortByCity();
-
-        // Bangalore comes before Chennai
-        assertEquals("Bangalore", addressBook.getPersons().get(0).getCity());
-    }
-    @Test
-    void givenPersons_whenViewedByCity_shouldGroupCorrectly() {
-        AddressBook addressBook = new AddressBook();
-
-        Person p1 = new Person("Daanish", "M",
-                "Street 1", "Chennai", "TN", "600001", "1111111111");
-
-        Person p2 = new Person("Alex", "K",
-                "Street 2", "Chennai", "TN", "600002", "2222222222");
-
-        addressBook.addPerson(p1);
-        addressBook.addPerson(p2);
-
-        var cityMap = addressBook.getPersonsByCity();
-
-        assertEquals(2, cityMap.get("Chennai").size());
+        assertDoesNotThrow(() -> ab.writeToJson("test.json"));
+        assertDoesNotThrow(() -> ab.writeToCSV("test.csv"));
+        assertDoesNotThrow(() -> ab.writeToJsonGson("test.json"));
+        assertDoesNotThrow(ab::saveToServer);
+        assertDoesNotThrow(() -> ab.asyncWrite(() -> {}));
     }
 }

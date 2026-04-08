@@ -8,11 +8,4 @@ public class AddressBookMain {
         AddressBookMain main = new AddressBookMain();
         System.out.println(main.getWelcomeMessage());
     }
-    public void editPerson(String firstName, String newAddress) {
-        for (Person person : persons) {
-            if (person.getFirstName().equals(firstName)) {
-                person.setAddress(newAddress);
-            }
-        }
-    }
 }
