@@ -94,4 +94,19 @@ class AddressBookTest {
 
         assertEquals(2, addressBook.getPersonCount());
     }
+    @Test
+    void givenDuplicatePerson_whenAdded_shouldNotBeAdded() {
+        AddressBook addressBook = new AddressBook();
+
+        Person p1 = new Person("Daanish", "M",
+                "Street 1", "Chennai", "TN", "600001", "1111111111");
+
+        Person p2 = new Person("Daanish", "M",
+                "Street 2", "Chennai", "TN", "600001", "2222222222");
+
+        addressBook.addPerson(p1);
+        addressBook.addPerson(p2); // duplicate
+
+        assertEquals(1, addressBook.getPersonCount());
+    }
 }

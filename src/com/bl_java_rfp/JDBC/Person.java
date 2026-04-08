@@ -25,7 +25,16 @@ public class Person {
 
     public void setAddress(String address) {
         this.address = address;
-    }`
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Person person = (Person) obj;
+        return firstName.equals(person.firstName) &&
+                lastName.equals(person.lastName);
+    }
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
     public String getCity() { return city; }
