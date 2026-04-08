@@ -39,6 +39,8 @@ public class Person {
     public String toString() {
         return firstName + " " + lastName + " - " + city;
     }
+    public String getState() { return state; }
+    public String getZip() { return zip; }
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
     public String getCity() { return city; }

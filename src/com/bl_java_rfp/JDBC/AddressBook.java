@@ -45,4 +45,20 @@ public class AddressBook {
     public List<Person> getPersons() {
         return persons;
     }
+    import java.util.Comparator;
+
+    // Sort by City
+    public void sortByCity() {
+        persons.sort(Comparator.comparing(Person::getCity));
+    }
+
+    // Sort by State
+    public void sortByState() {
+        persons.sort(Comparator.comparing(Person::getState));
+    }
+
+    // Sort by Zip
+    public void sortByZip() {
+        persons.sort(Comparator.comparing(Person::getZip));
+    }
 }

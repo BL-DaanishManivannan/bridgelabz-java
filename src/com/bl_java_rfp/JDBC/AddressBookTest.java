@@ -127,4 +127,22 @@ class AddressBookTest {
         // After sorting → Alex should be first
         assertEquals("Alex", addressBook.getPersons().get(0).getFirstName());
     }
+    @Test
+    void givenMultiplePersons_whenSortedByCity_shouldReturnSortedOrder() {
+        AddressBook addressBook = new AddressBook();
+
+        Person p1 = new Person("Daanish", "M",
+                "Street 1", "Chennai", "TN", "600001", "1111111111");
+
+        Person p2 = new Person("Alex", "K",
+                "Street 2", "Bangalore", "KA", "560001", "2222222222");
+
+        addressBook.addPerson(p1);
+        addressBook.addPerson(p2);
+
+        addressBook.sortByCity();
+
+        // Bangalore comes before Chennai
+        assertEquals("Bangalore", addressBook.getPersons().get(0).getCity());
+    }
 }
