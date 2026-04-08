@@ -21,7 +21,11 @@ public class Person {
         this.zip = zip;
         this.phoneNumber = phoneNumber;
     }
+    public String getAddress() { return address; }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }`
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
     public String getCity() { return city; }

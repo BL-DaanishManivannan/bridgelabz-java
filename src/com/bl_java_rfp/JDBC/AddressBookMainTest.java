@@ -1,14 +1,23 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class AddressBookMainTest {
+class AddressBookTest {
 
     @Test
-    void givenProgramStarts_shouldDisplayWelcomeMessage() {
-        AddressBookMain main = new AddressBookMain();
-        String message = main.getWelcomeMessage();
-        assertEquals("Welcome to Address Book Program", message);
+    void givenPerson_whenEdited_shouldUpdateDetails() {
+        AddressBook addressBook = new AddressBook();
+
+        Person person = new Person(
+                "Daanish", "M",
+                "Old Street", "Chennai",
+                "TN", "600001",
+                "9999999999"
+        );
+
+        addressBook.addPerson(person);
+
+        addressBook.editPerson("Daanish", "New Street");
+
+        assertEquals("New Street", person.getAddress());
     }
-
-
 }
