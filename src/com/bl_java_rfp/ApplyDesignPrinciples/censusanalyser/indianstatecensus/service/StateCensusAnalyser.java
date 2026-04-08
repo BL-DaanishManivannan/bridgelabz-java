@@ -2,6 +2,7 @@ package com.bl_java_rfp.ApplyDesignPrinciples.censusanalyser.indianstatecensus.s
 
 import com.bl_java_rfp.ApplyDesignPrinciples.censusanalyser.indianstatecensus.exception.CensusAnalyserException;
 import com.bl_java_rfp.ApplyDesignPrinciples.censusanalyser.indianstatecensus.model.StateCensus;
+import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.Comparator;
@@ -44,5 +45,11 @@ public class StateCensusAnalyser {
         return data.stream()
                 .sorted(Comparator.comparing(StateCensus::getAreaInSqKm))
                 .collect(Collectors.toList());
+    }
+
+    // UC13 → Convert to JSON
+    public String convertToJSON(List<StateCensus> data) {
+        Gson gson = new Gson();
+        return gson.toJson(data);
     }
 }
