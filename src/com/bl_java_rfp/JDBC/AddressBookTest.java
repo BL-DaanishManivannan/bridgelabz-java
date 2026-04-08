@@ -79,4 +79,19 @@ class AddressBookTest {
 
         assertEquals(0, addressBook.getPersonCount());
     }
+    @Test
+    void givenMultiplePersons_shouldBeAddedToAddressBook() {
+        AddressBook addressBook = new AddressBook();
+
+        Person p1 = new Person("Daanish", "M",
+                "Street 1", "Chennai", "TN", "600001", "1111111111");
+
+        Person p2 = new Person("Alex", "K",
+                "Street 2", "Bangalore", "KA", "560001", "2222222222");
+
+        addressBook.addPerson(p1);
+        addressBook.addPerson(p2);
+
+        assertEquals(2, addressBook.getPersonCount());
+    }
 }
