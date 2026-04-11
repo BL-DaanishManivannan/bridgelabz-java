@@ -13,8 +13,9 @@
     font-weight: bold;
 }
 
+
 .form-container {
-    width: 40%;
+    width: 80%;
     margin: 30px auto;
     padding: 20px;
     border-radius: 10px;
@@ -38,6 +39,7 @@
 }
 
 label{
+    width: 40%;
     font-size: 18px;
 }
 input {
@@ -52,11 +54,11 @@ input {
 }
 
 .gnd{
-    margin-right: 42px;
+    margin-right: 243px;
 }
 
 .dept{
-    margin-right: 25px;
+    margin-right: 150px;
 }
 .profile-pics {
     display: flex;
@@ -85,12 +87,71 @@ button{
     border-radius: 10px;
 }
 
-.date-row{
-    display: flex;
-    flex-direction: row;
-    
-}
+
 
 select{
     margin-left: 30px;
+}
+
+
+.home-container {
+    width: 80%;
+    margin: 30px auto;
+    background: #f8f8f8;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-btn {
+    background: #2e8bc0;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+}
+
+
+.emp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.emp-table th, .emp-table td {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.table-profile {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.dept-chip {
+    background: #b8e1ff;
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    margin: 2px;
+}
+
+.btn-small {
+    padding: 5px 10px;
+    border: none;
+    background: #00a8cc;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-small.delete {
+    background: #e74c3c;
 }
